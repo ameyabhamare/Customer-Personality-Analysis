@@ -7,7 +7,7 @@ Tool
 Human temporal routine behavioral analysis and pattern recognition
 
 ### Questions
-We propose a tool FitMe that allows you to feed in your smart watch data to provide you with answer to questions:
+We propose a tool FitMe that allows you to feed in your smart watch data to provide you with answer to questions
 * How active are your days? Do you spend a considerable amount of time being sedentary?
 * How does this data vary on weekdays vs weekends?
 * What factors contribute to the highest calorie burn?
