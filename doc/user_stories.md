@@ -1,0 +1,1 @@
+Alex is a 50 year old software engineering manager who was diagnosed with high sugar levels. Doctors have attributed this to his sedentary lifestyle. As a result, he gets into the habit of going on walks everyday. He wants to use our tool to look at patterns across the week
