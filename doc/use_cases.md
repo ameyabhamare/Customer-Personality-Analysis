@@ -22,3 +22,10 @@
 ## Use Case 2: Heart Rate Analysis
 
 ## Use Case 3: ML Model - Predicting Total Calorie Requirement
+
+1. The user wants to know the daily caloric based on their lifestyle adjustment: if they increase their total number of steps, decrease the sedentary minutes: how much would be their daily caloric
+
+2. The user would be provided sliders of the important metrics which contribute to predicting the daily caloric
+
+3. The user can adjust these metrics and get an instant number(daily caloric) based on which they can plan their caloric intake and improve their lifestyle
+
