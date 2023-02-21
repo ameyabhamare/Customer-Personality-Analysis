@@ -5,14 +5,14 @@
 2. The user selects the use case from the drop-down, clicks on the 'Submit' button, and waits for the insights to be generated.
 
 3. The user gets back the following insights in form of charts and visuals:
-		- Total time in bed v/s total sleep time.
-		- Trends in sleep intensity throughout the night.
-		- Minutes asleep v/s sedentary minutes.
-		- Trends in the number of steps and quality of sleep.
-		- Distribution of hourly steps and physical activity throughout the day.
-		- Workout routine v/s sleep quality.
-		- Correlation between calories burnt and quality of sleep.
-		- No. of steps v/s weight throughout the week. 
+	- Total time in bed v/s total sleep time.
+	- Trends in sleep intensity throughout the night.
+	- Minutes asleep v/s sedentary minutes.
+	- Trends in the number of steps and quality of sleep.
+	- Distribution of hourly steps and physical activity throughout the day.
+	- Workout routine v/s sleep quality.
+	- Correlation between calories burnt and quality of sleep.
+	- No. of steps v/s weight throughout the week. 
 
 4. The user receives relevant recommendations to improve their lifestyle.
 5. User exits the FitMe portal. 
