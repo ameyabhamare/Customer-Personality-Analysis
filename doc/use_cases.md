@@ -15,7 +15,7 @@
 	- No. of steps v/s weight throughout the week. 
 
 4. The user receives relevant recommendations to improve their lifestyle.
-5. User exits the FitMe portal. 
+5. The user exits the FitMe portal. 
   
   
 
