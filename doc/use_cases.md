@@ -23,8 +23,7 @@
 2. The user selects the use case from the drop-down, clicks on the 'Submit' button, and waits for the insights to be generated.
 
 3. The user gets back the following insights in form of charts and visuals:
-	- Resting heart rate variation across the day.
-	- Average daily resting heart rate acorss days of the week. 
+	- Average daily resting heart rate across days of the week. 
 	- How does their heart rate relate to sleep time across the week. 
 	- How does their heart rate change with varying activity levels across the week.
 	- How does heart rate relate to activity levels, sleep.
