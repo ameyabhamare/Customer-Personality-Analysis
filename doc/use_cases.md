@@ -24,9 +24,8 @@
 
 3. The user gets back the following insights in form of charts and visuals:
 	- Average daily resting heart rate across days of the week. 
-	- How does their heart rate relate to sleep time across the week. 
-	- How does their heart rate change with varying activity levels across the week.
-	- How does heart rate relate to activity levels, sleep.
+	- What is the distribution of bpm i.e. what value does their resting bpm revolve around.
+	- How does heart rate relate to sleep duration. 
 
 4. The user receives relevant recommendations to improve their lifestyle.
 5. The user exits the FitMe portal. 
