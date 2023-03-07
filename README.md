@@ -20,4 +20,4 @@ The end product will be a tool that functions as described above. We will host i
 The [FitBit Fitness Tracker Data](https://www.kaggle.com/datasets/arashnic/fitbit) is a rich collection of 18 different csv files that collates information about daily activities, calorie, heartrate, sleep cycles, intensities and steps, among others.
 
 ### Contributors
-Ameya Bhamare, Akshit Miglani, Harshit Rai
+Ameya Bhamare, Akshit Miglani, Harshit Rai, Jeremie Poisson

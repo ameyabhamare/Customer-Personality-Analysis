@@ -1,6 +1,5 @@
 ## Alex - Software Engineering Manager
-Alex, 50 M was diagnosed with high sugar levels. Doctors have attributed this to his sedentary lifestyle. As a result, he gets into the habit of going on walks everyday. He wants to use FitMe to look his activity levels across the week. He exports his watch data as a csv and sets 'activity' as his goal. As a result, FitMe displays relevant visualizations that help him stay intune with his fitness goals.  
+Alex, 50 M was diagnosed with high sugar levels. Doctors have attributed this to his sedentary lifestyle. As a result, he gets into the habit of going on walks everyday. He wants to use FitMe to look his activity levels across the week. He exports his watch data as a csv and sets 'Activity and Weight analysis' as his goal. As a result, FitMe displays relevant visualizations that help him stay intune with his fitness goals.  
 
 ## Team Member - Project Developer
-
-
+Martin, 25 M, is maintaining the project to make the FitMe tool easier to use. They have proposed to create an interface that would allow users to input their activity and weight data in the form of a CSV file to the FitMe portal. The developer is responsible for ensuring that the tool has been thoroughly tested and that all exception handling cases are in place to manage various user behavior/interactivity. Furthermore, the developer would ensure that all trends and charts are displayed in an easy to comprehend manner/derive actionable insights from: total time in bed vs total sleep time. leep intensity trends throughout the night, relationship between calories burned and sleep quality, and so on. The developer's additional responsibility is to keep the project well-documented so that another developer can easily take over and contribute.
