@@ -22,7 +22,7 @@ def plot_sleep_time_vs_time_in_bed(df_sleep_data, user_id=None):
         user_id = '1503960366'
     df_sleep_data = df_sleep_data.query(f"Id == {user_id}")
     df_sleep_data['SleepDate'] = df_sleep_data.apply(lambda x: x['SleepDay'].split(" ")[0], axis=1)
-    df_sleep_data = df_sleep_data.drop(['Id', 'SleepDay', 'TotalSleepRecords'], axis=1)
+    df_sleep_data = df_sleep_data.drop(['SleepDay', 'TotalSleepRecords'], axis=1)
     ax_1 = plt.subplots(figsize=(12,6))
     ax_1 = sns.barplot(x=df_sleep_data["SleepDate"],
                         y=df_sleep_data["TotalTimeInBed"], color='r' )
@@ -31,7 +31,7 @@ def plot_sleep_time_vs_time_in_bed(df_sleep_data, user_id=None):
     ax_1.set(xlabel="Date", ylabel="Minutes")
     plt.xticks(rotation=90)
     plt.show()
-    return df_sleep_data
+    return df_sleep_data, ax_1
 
 def plot_daily_step_pattern(df_daily_steps, user_id=None):
     """
@@ -46,12 +46,11 @@ def plot_daily_step_pattern(df_daily_steps, user_id=None):
     if user_id is None:
         user_id = '1503960366'
     df_daily_steps = df_daily_steps.query(f"Id == {user_id}")
-    df_daily_steps = df_daily_steps.drop(['Id'], axis=1)
-    _, ax1 = plt.subplots(figsize=(12,6))
+    ax1 = plt.subplots(figsize=(12,6))
     sns.barplot(df_daily_steps, x='ActivityDay', y='StepTotal', color='g', ax=ax1)
     plt.xticks(rotation=90)
     plt.show()
-    return df_daily_steps
+    return df_daily_steps, ax1
 
 def plot_daily_sleep_vs_step_count(df_sleep_and_steps):
     """
@@ -85,13 +84,12 @@ def plot_daily_calories_pattern(df_daily_calories, user_id=None):
     if user_id is None:
         user_id = '1503960366'
     df_daily_calories = df_daily_calories.query(f"Id == {user_id}")
-    df_daily_calories = df_daily_calories.drop(['Id'], axis=1)
     _, ax1 = plt.subplots(figsize=(12,6))
     sns.lineplot(data = df_daily_calories, x='ActivityDay', y='Calories', marker='o',
                     ax=ax1, color='g')
     plt.xticks(rotation=90)
     plt.show()
-    return df_daily_calories
+    return df_daily_calories, ax1
 
 if __name__ == "__main__":
 
