@@ -23,20 +23,18 @@
 2. The user selects the use case from the drop-down, clicks on the 'Submit' button, and waits for the insights to be generated.
 
 3. The user gets back the following insights in form of charts and visuals:
-	- Resting heart rate variation across the day.
-	- Average daily resting heart rate acorss days of the week. 
-	- How does their heart rate relate to sleep time across the week. 
-	- How does their heart rate change with varying activity levels across the week.
-	- How does heart rate relate to activity levels, sleep.
+	- Average daily resting heart rate across days of the week. 
+	- What is the distribution of bpm i.e. what value does their resting bpm revolve around.
+	- How does heart rate relate to sleep duration. 
 
 4. The user receives relevant recommendations to improve their lifestyle.
 5. The user exits the FitMe portal. 
 
 ## Use Case 3: ML Model - Predicting Total Calorie Requirement
 
-1. The user wants to know the daily caloric based on their lifestyle adjustment: if they increase their total number of steps, decrease the sedentary minutes: how much would be their daily caloric
+1. The user will be able to see their daily caloric needs based on their lifestyle adjustment. For instance, if they increase their total number of steps, and decrease their number of sedentary minutes, how much would be their daily caloric requirement be / change by?
 
-2. The user would be provided sliders of the important metrics which contribute to predicting the daily caloric
+2. The user is provided with sliders of the important metrics which contribute to predicting the daily caloric requirement. 
 
-3. The user can adjust these metrics and get an instant number(daily caloric) based on which they can plan their caloric intake and improve their lifestyle
+3. The user can adjust these metrics and get an instant number (daily caloric requirement) based on which they can plan their caloric intake and improve their lifestyle.
 
