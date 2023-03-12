@@ -3,9 +3,9 @@ This module analyzes the activity and weight data to generate insights about
 the user's health.
 """
 
-import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+import pandas as pd
 
 
 def plot_sleep_time_vs_time_in_bed(df_sleep_data, user_id=None):
@@ -23,7 +23,7 @@ def plot_sleep_time_vs_time_in_bed(df_sleep_data, user_id=None):
     df_sleep_data = df_sleep_data.query(f"Id == {user_id}")
     df_sleep_data['SleepDate'] = df_sleep_data.apply(lambda x: x['SleepDay'].split(" ")[0], axis=1)
     df_sleep_data = df_sleep_data.drop(['SleepDay', 'TotalSleepRecords'], axis=1)
-    ax_1 = plt.subplots(figsize=(12,6))
+    _, ax_1 = plt.subplots(figsize=(12,6))
     ax_1 = sns.barplot(x=df_sleep_data["SleepDate"],
                         y=df_sleep_data["TotalTimeInBed"], color='r' )
     ax_1 = sns.barplot(x=df_sleep_data["SleepDate"],
@@ -31,7 +31,7 @@ def plot_sleep_time_vs_time_in_bed(df_sleep_data, user_id=None):
     ax_1.set(xlabel="Date", ylabel="Minutes")
     plt.xticks(rotation=90)
     plt.show()
-    return df_sleep_data, ax_1
+    return df_sleep_data
 
 def plot_daily_step_pattern(df_daily_steps, user_id=None):
     """
@@ -46,11 +46,11 @@ def plot_daily_step_pattern(df_daily_steps, user_id=None):
     if user_id is None:
         user_id = '1503960366'
     df_daily_steps = df_daily_steps.query(f"Id == {user_id}")
-    ax1 = plt.subplots(figsize=(12,6))
+    _, ax1 = plt.subplots(figsize=(12,6))
     sns.barplot(df_daily_steps, x='ActivityDay', y='StepTotal', color='g', ax=ax1)
     plt.xticks(rotation=90)
     plt.show()
-    return df_daily_steps, ax1
+    return df_daily_steps
 
 def plot_daily_sleep_vs_step_count(df_sleep_and_steps):
     """
@@ -89,7 +89,7 @@ def plot_daily_calories_pattern(df_daily_calories, user_id=None):
                     ax=ax1, color='g')
     plt.xticks(rotation=90)
     plt.show()
-    return df_daily_calories, ax1
+    return df_daily_calories
 
 if __name__ == "__main__":
 
