@@ -80,16 +80,17 @@ def plot_sleep_vs_bpm(daily_values, user_id = None):
     ax1.set(ylabel = 'BPM')
     plt.show()
     
-def create_final_df(df_heartrate_seconds, df_daily_sleep):
+def create_final_df():
     '''
     A method to process and merge the heart rate and sleep datasets
     Arguments:
-    df_heartrate_seconds - A heart rate dataset on a per-second frequency
-    df_daily_sleep - A sleep dataset on a daily frequency
-    Return value:
     None
+    Return value:
+    A merged dataset containing heart rate data on a seconds level and sleep information on a daily level
     '''
-    df_heartrate_seconds['date_time'] = pd.to_datetime(heartrate_seconds['Time'],
+    heartrate_seconds = pd.read_csv('heart_rate_analysis/tests/mock_data/heartrate_seconds_merged.csv')
+    daily_sleep = pd.read_csv('heart_rate_analysis/tests/mock_data/sleepDay_merged.csv')
+    heartrate_seconds['date_time'] = pd.to_datetime(heartrate_seconds['Time'],
                                                     format = "%m/%d/%Y %I:%M:%S %p")
     heartrate_daily = heartrate_seconds.groupby('Id').resample(
         '1D', on = 'date_time', origin = '2016-04-12 07:21:00').Value.mean().reset_index()
@@ -99,7 +100,7 @@ def create_final_df(df_heartrate_seconds, df_daily_sleep):
     heartrate_daily['date_time'] = pd.to_datetime(heartrate_daily['date_time'],
                                                   format = "%Y/%m/%d")
     heartrate_daily['day_of_week'] = heartrate_daily['date_time'].dt.day_name()
-    df_daily_sleep['date_time'] = pd.to_datetime(daily_sleep['SleepDay'],
+    daily_sleep['date_time'] = pd.to_datetime(daily_sleep['SleepDay'],
                                               format = '%m/%d/%Y %I:%M:%S %p')
     daily_values = heartrate_daily.merge(daily_sleep, how = 'left', on = ['Id', 'date_time'])
     daily_values['Sleep Duration'] = pd.cut(x = daily_values['TotalMinutesAsleep'],
@@ -107,14 +108,4 @@ def create_final_df(df_heartrate_seconds, df_daily_sleep):
                                             labels = ['Less', 'Okay', 'Enough', 'Healthy'])
     return daily_values
 
-'''
-if __name__ == '__main__':
-    heartrate_seconds = pd.read_csv("../database/heartrate_seconds_merged.csv")
-    daily_sleep = pd.read_csv("../database/sleepDay_merged.csv")
-    df_final_proc = create_final_df(heartrate_seconds, daily_sleep)
-    plot_daily_heart_rate(df_final_proc, user_id = None)
-    plot_weekly_heart_rate(df_final_proc, user_id = None)
-    plot_bpm_density(df_final_proc, user_id = None)
-    plot_sleep_vs_bpm(df_final_proc, user_id = None)
-'''
     

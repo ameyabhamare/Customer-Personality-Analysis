@@ -43,28 +43,9 @@ for file_ in files:
     df = pd.read_csv(file_path)
     df = transform_dataframe(df)
         
-# Heart rate analysis       
-if selected_dropdown == 'Heart Rate': 
-    heartrate_seconds = pd.read_csv('heart_rate_analysis/tests/mock_data/heartrate_seconds_merged.csv')
-    daily_sleep = pd.read_csv('heart_rate_analysis/tests/mock_data/sleepDay_merged.csv')
-    heartrate_seconds['date_time'] = pd.to_datetime(heartrate_seconds['Time'],
-                                                    format = "%m/%d/%Y %I:%M:%S %p")
-    heartrate_daily = heartrate_seconds.groupby('Id').resample(
-        '1D', on = 'date_time', origin = '2016-04-12 07:21:00').Value.mean().reset_index()
-    heartrate_daily['date_time'] = pd.to_datetime(heartrate_daily['date_time'],
-                                                  format = "%m/%d/%Y %I:%M:%S %p")
-    heartrate_daily['date_time'] = heartrate_daily['date_time'].dt.date
-    heartrate_daily['date_time'] = pd.to_datetime(heartrate_daily['date_time'],
-                                                  format = "%Y/%m/%d")
-    heartrate_daily['day_of_week'] = heartrate_daily['date_time'].dt.day_name()
-    
-    daily_sleep['date_time'] = pd.to_datetime(daily_sleep['SleepDay'], 
-                                              format = '%m/%d/%Y %I:%M:%S %p')
-    daily_values = heartrate_daily.merge(daily_sleep, how = 'left', on = ['Id', 'date_time'])
-    daily_values['Sleep Duration'] = pd.cut(x = daily_values['TotalMinutesAsleep'],
-                                            bins = [0, 393, 442, 503, 775],
-                                            labels = ['Less', 'Okay', 'Enough', 'Healthy'])
-    
+# Heart rate analysis
+if selected_dropdown == 'Heart Rate':             
+    daily_values = create_final_df()
     plot_daily_heart_rate(daily_values, user_id = None)
     plot_weekly_heart_rate(daily_values, user_id = None)
     plot_bpm_density(daily_values, user_id = None)
