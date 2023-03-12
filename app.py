@@ -6,8 +6,11 @@ from sklearn.linear_model import LinearRegression
 
 import matplotlib
 import tkinter
+matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
+
 from activity_and_weight_analysis.activity_and_weight_analysis import *
+from heart_rate_analysis.heart_rate_analysis import *
 
 st.title("FitMe")
 st.markdown("Fitness Explorer. This app performs health analysis based on fitness tracking data")
@@ -42,8 +45,8 @@ for file_ in files:
         
 # Heart rate analysis       
 if selected_dropdown == 'Heart Rate': 
-    heartrate_seconds = pd.read_csv('heart_rate_analysis/mock_data/heartrate_seconds_merged.csv')
-    daily_sleep = pd.read_csv('heart_rate_analysis/mock_data/sleepDay_merged.csv')
+    heartrate_seconds = pd.read_csv('heart_rate_analysis/tests/mock_data/heartrate_seconds_merged.csv')
+    daily_sleep = pd.read_csv('heart_rate_analysis/tests/mock_data/sleepDay_merged.csv')
     heartrate_seconds['date_time'] = pd.to_datetime(heartrate_seconds['Time'],
                                                     format = "%m/%d/%Y %I:%M:%S %p")
     heartrate_daily = heartrate_seconds.groupby('Id').resample(
