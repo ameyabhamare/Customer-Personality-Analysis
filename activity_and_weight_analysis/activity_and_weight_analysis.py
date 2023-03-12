@@ -5,8 +5,6 @@ the user's health.
 
 import seaborn as sns
 import matplotlib.pyplot as plt
-import pandas as pd
-
 
 def plot_sleep_time_vs_time_in_bed(df_sleep_data, user_id=None):
     """
@@ -91,14 +89,14 @@ def plot_daily_calories_pattern(df_daily_calories, user_id=None):
     plt.show()
     return df_daily_calories
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
 
-    df_sleep_data_unproc = pd.read_csv("../data/sleepDay_merged.csv")
-    df_sleep_data_proc = plot_sleep_time_vs_time_in_bed(df_sleep_data_unproc, '1503960366')
-    df_daily_steps_unproc = pd.read_csv("../data/dailySteps_merged.csv")
-    df_daily_steps_proc = plot_daily_step_pattern(df_daily_steps_unproc, user_id=None)
-    df_sleep_and_steps_merged = pd.merge(df_daily_steps_proc, df_sleep_data_proc, how='inner',
-                                    left_on='ActivityDay', right_on='SleepDate')
-    plot_daily_sleep_vs_step_count(df_sleep_and_steps_merged)
-    df_daily_calories_unproc = pd.read_csv("../data/dailyCalories_merged.csv")
-    df_daily_calories_proc = plot_daily_calories_pattern(df_daily_calories_unproc, user_id=None)
+#     df_sleep_data_unproc = pd.read_csv("../data/sleepDay_merged.csv")
+#     df_sleep_data_proc = plot_sleep_time_vs_time_in_bed(df_sleep_data_unproc, '1503960366')
+#     df_daily_steps_unproc = pd.read_csv("../data/dailySteps_merged.csv")
+#     df_daily_steps_proc = plot_daily_step_pattern(df_daily_steps_unproc, user_id=None)
+#     df_sleep_and_steps_merged = pd.merge(df_daily_steps_proc, df_sleep_data_proc, how='inner',
+#                                     left_on='ActivityDay', right_on='SleepDate')
+#     plot_daily_sleep_vs_step_count(df_sleep_and_steps_merged)
+#     df_daily_calories_unproc = pd.read_csv("../data/dailyCalories_merged.csv")
+#     df_daily_calories_proc = plot_daily_calories_pattern(df_daily_calories_unproc, user_id=None)
