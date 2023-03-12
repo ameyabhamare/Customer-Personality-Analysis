@@ -1,8 +1,8 @@
 import streamlit as st
 import pandas as pd
-import datetime
 import seaborn as sns
 import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
 
 st.title("FitMe")
 st.markdown("Fitness Explorer. This app performs health analysis based on fitness tracking data")
@@ -20,8 +20,13 @@ def transform_dataframe(df):
     return df
 
 #This function is for the caloric model module
-def model_pipline():
-    pass
+def model_pipeline(df, x, y):
+    X = df.loc[:, x].values.reshape(-1, 1)  # values converts it into a numpy array
+    Y = df.loc[:, 'Calories'].values.reshape(-1, 1)  # -1 means that calculate the dimension of rows, but have 1 column
+    linear_regressor = LinearRegression()  # create object for the class
+    linear_regressor.fit(X, Y)  # perform linear regression
+    #Y_pred = linear_regressor.predict(X)  # make predictions
+    return linear_regressor
 
 #This function is for the caloric model module
 def daily_caloric_model():
@@ -48,8 +53,14 @@ if selected_dropdown == 'Activity & Weight':
     st.write("Activity & Weight")
 
 if selected_dropdown == 'Caloric Model':
-    st.slider('Feature 1', 0, 10, 1)
-    st.slider('Feature 2', 0, 10, 1)
-    st.slider('Feature 3', 0, 10, 1)
-    st.slider('Feature 4', 0, 10, 1)
-    st.write("Model Daily Caloric: ")
+    dropdown_c_options = ['VeryActiveMinutes', 'LightlyActiveMinutes', 'SedentaryMinutes']
+    selected_c_dropdown = st.selectbox("Select Variable", options = dropdown_c_options)
+    slider_val = st.slider(selected_c_dropdown, min(df[selected_c_dropdown]), max(df[selected_c_dropdown]), 1)
+    # st.slider('Feature 2', 0, 10, 1)
+    # st.slider('Feature 3', 0, 10, 1)
+    # st.slider('Feature 4', 0, 10, 1)
+    fig = plt.figure(figsize=(15, 8))
+    sns.regplot(data = df, x= selected_c_dropdown, y = 'Calories')
+    st.pyplot(fig)
+    lr = model_pipeline(df, selected_c_dropdown, 'Calories')
+    st.write(f"Model Daily Caloric: {round(lr.predict([[slider_val]])[0][0], 2)}")
