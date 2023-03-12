@@ -41,7 +41,6 @@ for file_ in files:
         df = pd.read_csv(file_path)
         df = transform_dataframe(df)
         
-
 # Heart rate analysis       
 if selected_dropdown == 'Heart Rate':
     heartrate_seconds = pd.read_csv('database/heartrate_seconds_merged.csv')
