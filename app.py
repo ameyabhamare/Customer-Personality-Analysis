@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import seaborn as sns
-import matplotlib.pyplot as plt
+
 from sklearn.linear_model import LinearRegression
 
 import matplotlib
@@ -10,7 +10,6 @@ matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
 from activity_and_weight_analysis.activity_and_weight_analysis import *
-from heart_rate_analysis.heart_rate_analysis import *
 
 st.title("FitMe")
 st.markdown("Fitness Explorer. This app performs health analysis based on fitness tracking data")
@@ -44,7 +43,8 @@ for file_ in files:
     df = transform_dataframe(df)
         
 # Heart rate analysis
-if selected_dropdown == 'Heart Rate':             
+if selected_dropdown == 'Heart Rate':   
+    from heart_rate_analysis.heart_rate_analysis import *          
     daily_values = create_final_df()
     plot_daily_heart_rate(daily_values, user_id = None)
     plot_weekly_heart_rate(daily_values, user_id = None)
