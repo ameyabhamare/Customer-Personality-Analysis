@@ -3,6 +3,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
+
 import matplotlib
 import tkinter
 import matplotlib.pyplot as plt
@@ -40,9 +41,9 @@ for file_ in files:
         df = transform_dataframe(df)
         
 # Heart rate analysis       
-if selected_dropdown == 'Heart Rate':
-    heartrate_seconds = pd.read_csv('database/heartrate_seconds_merged.csv')
-    daily_sleep = pd.read_csv('database/sleepDay_merged.csv')
+if selected_dropdown == 'Heart Rate': 
+    heartrate_seconds = pd.read_csv('heart_rate_analysis/mock_data/heartrate_seconds_merged.csv')
+    daily_sleep = pd.read_csv('heart_rate_analysis/mock_data/sleepDay_merged.csv')
     heartrate_seconds['date_time'] = pd.to_datetime(heartrate_seconds['Time'],
                                                     format = "%m/%d/%Y %I:%M:%S %p")
     heartrate_daily = heartrate_seconds.groupby('Id').resample(
