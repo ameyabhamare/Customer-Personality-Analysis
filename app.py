@@ -64,36 +64,12 @@ if selected_dropdown == 'Heart Rate':
     daily_values['Sleep Duration'] = pd.cut(x = daily_values['TotalMinutesAsleep'],
                                             bins = [0, 393, 442, 503, 775],
                                             labels = ['Less', 'Okay', 'Enough', 'Healthy'])
-    user_id = None
-    if user_id is None:
-        user_id = '2026352035'
-    daily_values = daily_values.query(f"Id == {user_id}")
-    _, ax1 = plt.subplots(figsize = (12,6))
-    ax1 = sns.lineplot(x = 'date_time', y = 'Value', data = daily_values, palette = 'bright')
-    ax1.set(xlabel = 'Date')
-    ax1.set(ylabel = 'bpm')
-    ax1.plot()
-    plt.show()
     
-    _, ax2 = plt.subplots(figsize = (12, 6))
-    ax2 = sns.lineplot(x = 'day_of_week', y = 'Value', data = daily_values, palette = 'bright')
-    ax2.set(xlabel = 'Day of the week')
-    ax2.plot()
-    plt.show()
-    
-    _, ax3 = plt.subplots(figsize = (12, 6))
-    ax3 = sns.kdeplot(daily_values['Value'], shade = True, legend = False)
-    ax3.set(xlabel = 'BPM')
-    ax3.set(ylabel = 'Distribution')
-    ax3.plot()
-    plt.show()
-    
-    _, ax4 = plt.subplots(figsize = (12, 6))
-    ax4 = sns.boxplot(x = 'Sleep Duration', y = 'Value', data = daily_values, color = 'blue')
-    ax4.set(xlabel = 'Sleep duration in minutes')
-    ax4.set(ylabel = 'BPM')
-    plt.show()
-    
+    plot_daily_heart_rate(daily_values, user_id = None)
+    plot_weekly_heart_rate(daily_values, user_id = None)
+    plot_bpm_density(daily_values, user_id = None)
+    plot_sleep_vs_bpm(daily_values, user_id = None)
+        
 if selected_dropdown == 'Activity & Weight':
         df_sleep_data_unproc = pd.read_csv("database/sleepDay_merged.csv")
         df_daily_steps_unproc = pd.read_csv("database/dailySteps_merged.csv")
