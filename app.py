@@ -33,10 +33,6 @@ def model_pipeline(df, x, y):
     #Y_pred = linear_regressor.predict(X)  # make predictions
     return linear_regressor
 
-#This function is for the caloric model module
-def daily_caloric_model():
-    pass
-
 #Processing multiple files in the user selection dropdown
 for file_ in files:
         file_name = file_.name
@@ -44,16 +40,7 @@ for file_ in files:
         df = pd.read_csv(file_path)
         df = transform_dataframe(df)
         
-'''
-def read_files():
-    print(files)
-    #assuming we upload in order 
-    heart, sleep = files[0], files[1] 
-    
-    heartrate_seconds = pd.read_csv(f'database/{heart}')
-    daily_sleep = pd.read_csv(f'database/{sleep}')
-    return (heartrate_seconds, daily_sleep)
-'''
+
 # Heart rate analysis       
 if selected_dropdown == 'Heart Rate':
     heartrate_seconds = pd.read_csv('database/heartrate_seconds_merged.csv')
