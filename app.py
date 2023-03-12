@@ -3,12 +3,11 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
+import matplotlib
+import tkinter
+import matplotlib.pyplot as plt
+matplotlib.use('TkAgg')
 
-from heart_rate_analysis.viz import create_final_df, plot_daily_heart_rate, plot_weekly_heart_rate, plot_bpm_density, plot_sleep_vs_bpm
-from activity_and_weight_analysis.activity_and_weight_analysis import plot_sleep_time_vs_time_in_bed, plot_daily_step_pattern, plot_daily_sleep_vs_step_count, plot_daily_calories_pattern
-import sys
-sys.path.insert(0, 'heart_rate_analysis')
-sys.path.insert(1, 'activity_and_weight_analysis')
 
 st.title("FitMe")
 st.markdown("Fitness Explorer. This app performs health analysis based on fitness tracking data")
@@ -44,37 +43,70 @@ for file_ in files:
         file_path = f'../data/{file_name}'
         df = pd.read_csv(file_path)
         df = transform_dataframe(df)
-
-# Heart rate analysis
-if selected_dropdown == 'Heart Rate':
-    '''
-    if files is not None:
-        fig = plt.figure(figsize=(15, 8))
-        try:
-            sns.lineplot(data = df , y = 'Calories', x = 'dayofweek')
-        except NameError as e:
-            st.write("Heart Rate file not uploaded correctly")
-        st.pyplot(fig)
-    '''
-    heartrate_seconds = pd.read_csv("database/heartrate_seconds_merged.csv")
-    daily_sleep = pd.read_csv("database/sleepDay_merged.csv")
-    df_final_proc = create_final_df(heartrate_seconds, daily_sleep)
-    plot_daily_heart_rate(df_final_proc, user_id = None)
-    plot_weekly_heart_rate(df_final_proc, user_id = None)
-    plot_bpm_density(df_final_proc, user_id = None)
-    plot_sleep_vs_bpm(df_final_proc, user_id = None)
+        
+'''
+def read_files():
+    print(files)
+    #assuming we upload in order 
+    heart, sleep = files[0], files[1] 
     
-
+    heartrate_seconds = pd.read_csv(f'database/{heart}')
+    daily_sleep = pd.read_csv(f'database/{sleep}')
+    return (heartrate_seconds, daily_sleep)
+'''
+# Heart rate analysis       
+if selected_dropdown == 'Heart Rate':
+    heartrate_seconds = pd.read_csv('database/heartrate_seconds_merged.csv')
+    daily_sleep = pd.read_csv('database/sleepDay_merged.csv')
+    heartrate_seconds['date_time'] = pd.to_datetime(heartrate_seconds['Time'],
+                                                    format = "%m/%d/%Y %I:%M:%S %p")
+    heartrate_daily = heartrate_seconds.groupby('Id').resample(
+        '1D', on = 'date_time', origin = '2016-04-12 07:21:00').Value.mean().reset_index()
+    heartrate_daily['date_time'] = pd.to_datetime(heartrate_daily['date_time'],
+                                                  format = "%m/%d/%Y %I:%M:%S %p")
+    heartrate_daily['date_time'] = heartrate_daily['date_time'].dt.date
+    heartrate_daily['date_time'] = pd.to_datetime(heartrate_daily['date_time'],
+                                                  format = "%Y/%m/%d")
+    heartrate_daily['day_of_week'] = heartrate_daily['date_time'].dt.day_name()
+    
+    daily_sleep['date_time'] = pd.to_datetime(daily_sleep['SleepDay'], 
+                                              format = '%m/%d/%Y %I:%M:%S %p')
+    daily_values = heartrate_daily.merge(daily_sleep, how = 'left', on = ['Id', 'date_time'])
+    daily_values['Sleep Duration'] = pd.cut(x = daily_values['TotalMinutesAsleep'],
+                                            bins = [0, 393, 442, 503, 775],
+                                            labels = ['Less', 'Okay', 'Enough', 'Healthy'])
+    user_id = None
+    if user_id is None:
+        user_id = '2026352035'
+    daily_values = daily_values.query(f"Id == {user_id}")
+    _, ax1 = plt.subplots(figsize = (12,6))
+    ax1 = sns.lineplot(x = 'date_time', y = 'Value', data = daily_values, palette = 'bright')
+    ax1.set(xlabel = 'Date')
+    ax1.set(ylabel = 'bpm')
+    ax1.plot()
+    plt.show()
+    
+    _, ax2 = plt.subplots(figsize = (12, 6))
+    ax2 = sns.lineplot(x = 'day_of_week', y = 'Value', data = daily_values, palette = 'bright')
+    ax2.set(xlabel = 'Day of the week')
+    ax2.plot()
+    plt.show()
+    
+    _, ax3 = plt.subplots(figsize = (12, 6))
+    ax3 = sns.kdeplot(daily_values['Value'], shade = True, legend = False)
+    ax3.set(xlabel = 'BPM')
+    ax3.set(ylabel = 'Distribution')
+    ax3.plot()
+    plt.show()
+    
+    _, ax4 = plt.subplots(figsize = (12, 6))
+    ax4 = sns.boxplot(x = 'Sleep Duration', y = 'Value', data = daily_values, color = 'blue')
+    ax4.set(xlabel = 'Sleep duration in minutes')
+    ax4.set(ylabel = 'BPM')
+    plt.show()
+    
 if selected_dropdown == 'Activity & Weight':
-    df_sleep_data_unproc = pd.read_csv("database/sleepDay_merged.csv")
-    df_daily_steps_unproc = pd.read_csv("database/dailySteps_merged.csv")
-    df_daily_calories_unproc = pd.read_csv("database/dailyCalories_merged.csv")
-    df_sleep_data_proc = plot_sleep_time_vs_time_in_bed(df_sleep_data_unproc, '1503960366')
-    df_daily_steps_proc = plot_daily_step_pattern(df_daily_steps_unproc, user_id=None)
-    df_sleep_and_steps_merged = pd.merge(df_daily_steps_proc, df_sleep_data_proc, how='inner',
-                                    left_on='ActivityDay', right_on='SleepDate')
-    plot_daily_sleep_vs_step_count(df_sleep_and_steps_merged)
-    df_daily_calories_proc = plot_daily_calories_pattern(df_daily_calories_unproc, user_id=None)
+    st.write("Activity & Weight")
 
 if selected_dropdown == 'Caloric Model':
     dropdown_c_options = ['VeryActiveMinutes', 'LightlyActiveMinutes', 'SedentaryMinutes']
