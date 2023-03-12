@@ -35,10 +35,10 @@ def model_pipeline(df, x, y):
 
 #Processing multiple files in the user selection dropdown
 for file_ in files:
-        file_name = file_.name
-        file_path = f'data/{file_name}'
-        df = pd.read_csv(file_path)
-        df = transform_dataframe(df)
+    file_name = file_.name
+    file_path = f'data/{file_name}'
+    df = pd.read_csv(file_path)
+    df = transform_dataframe(df)
         
 # Heart rate analysis       
 if selected_dropdown == 'Heart Rate': 
