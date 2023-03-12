@@ -4,6 +4,12 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 
+from heart_rate_analysis.viz import create_final_df, plot_daily_heart_rate, plot_weekly_heart_rate, plot_bpm_density, plot_sleep_vs_bpm
+from activity_and_weight_analysis.activity_and_weight_analysis import plot_sleep_time_vs_time_in_bed, plot_daily_step_pattern, plot_daily_sleep_vs_step_count, plot_daily_calories_pattern
+import sys
+sys.path.insert(0, 'heart_rate_analysis')
+sys.path.insert(1, 'activity_and_weight_analysis')
+
 st.title("FitMe")
 st.markdown("Fitness Explorer. This app performs health analysis based on fitness tracking data")
 files = st.sidebar.file_uploader("Please choose a csv file", accept_multiple_files = True)
@@ -39,8 +45,9 @@ for file_ in files:
         df = pd.read_csv(file_path)
         df = transform_dataframe(df)
 
-#Modular work
+# Heart rate analysis
 if selected_dropdown == 'Heart Rate':
+    '''
     if files is not None:
         fig = plt.figure(figsize=(15, 8))
         try:
@@ -48,9 +55,26 @@ if selected_dropdown == 'Heart Rate':
         except NameError as e:
             st.write("Heart Rate file not uploaded correctly")
         st.pyplot(fig)
+    '''
+    heartrate_seconds = pd.read_csv("database/heartrate_seconds_merged.csv")
+    daily_sleep = pd.read_csv("database/sleepDay_merged.csv")
+    df_final_proc = create_final_df(heartrate_seconds, daily_sleep)
+    plot_daily_heart_rate(df_final_proc, user_id = None)
+    plot_weekly_heart_rate(df_final_proc, user_id = None)
+    plot_bpm_density(df_final_proc, user_id = None)
+    plot_sleep_vs_bpm(df_final_proc, user_id = None)
+    
 
 if selected_dropdown == 'Activity & Weight':
-    st.write("Activity & Weight")
+    df_sleep_data_unproc = pd.read_csv("database/sleepDay_merged.csv")
+    df_daily_steps_unproc = pd.read_csv("database/dailySteps_merged.csv")
+    df_daily_calories_unproc = pd.read_csv("database/dailyCalories_merged.csv")
+    df_sleep_data_proc = plot_sleep_time_vs_time_in_bed(df_sleep_data_unproc, '1503960366')
+    df_daily_steps_proc = plot_daily_step_pattern(df_daily_steps_unproc, user_id=None)
+    df_sleep_and_steps_merged = pd.merge(df_daily_steps_proc, df_sleep_data_proc, how='inner',
+                                    left_on='ActivityDay', right_on='SleepDate')
+    plot_daily_sleep_vs_step_count(df_sleep_and_steps_merged)
+    df_daily_calories_proc = plot_daily_calories_pattern(df_daily_calories_unproc, user_id=None)
 
 if selected_dropdown == 'Caloric Model':
     dropdown_c_options = ['VeryActiveMinutes', 'LightlyActiveMinutes', 'SedentaryMinutes']
