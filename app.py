@@ -1,15 +1,10 @@
 import streamlit as st
 import pandas as pd
 import seaborn as sns
-
 from sklearn.linear_model import LinearRegression
-
 import matplotlib
-import tkinter
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
-
-from activity_and_weight_analysis.activity_and_weight_analysis import *
 
 st.title("FitMe")
 st.markdown("Fitness Explorer. This app performs health analysis based on fitness tracking data")
@@ -52,6 +47,7 @@ if selected_dropdown == 'Heart Rate':
     plot_sleep_vs_bpm(daily_values, user_id = None)
         
 if selected_dropdown == 'Activity & Weight':
+        from activity_and_weight_analysis.activity_and_weight_analysis import *
         df_sleep_data_unproc = pd.read_csv("database/sleepDay_merged.csv")
         df_daily_steps_unproc = pd.read_csv("database/dailySteps_merged.csv")
         df_daily_calories_unproc = pd.read_csv("database/dailyCalories_merged.csv")
