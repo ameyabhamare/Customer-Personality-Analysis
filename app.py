@@ -6,7 +6,7 @@ from sklearn.linear_model import LinearRegression
 import matplotlib
 import tkinter
 import matplotlib.pyplot as plt
-matplotlib.use('TkAgg')
+from activity_and_weight_analysis.activity_and_weight_analysis import *
 
 st.title("FitMe")
 st.markdown("Fitness Explorer. This app performs health analysis based on fitness tracking data")
@@ -105,8 +105,6 @@ if selected_dropdown == 'Heart Rate':
     plt.show()
     
 if selected_dropdown == 'Activity & Weight':
-    try:
-        from activity_and_weight_analysis.activity_and_weight_analysis import plot_sleep_time_vs_time_in_bed, plot_daily_step_pattern, plot_daily_sleep_vs_step_count, plot_daily_calories_pattern
         df_sleep_data_unproc = pd.read_csv("database/sleepDay_merged.csv")
         df_daily_steps_unproc = pd.read_csv("database/dailySteps_merged.csv")
         df_daily_calories_unproc = pd.read_csv("database/dailyCalories_merged.csv")
@@ -116,8 +114,6 @@ if selected_dropdown == 'Activity & Weight':
                                         left_on='ActivityDay', right_on='SleepDate')
         plot_daily_sleep_vs_step_count(df_sleep_and_steps_merged)
         df_daily_calories_proc = plot_daily_calories_pattern(df_daily_calories_unproc, user_id=None)
-    except:
-        print("Error in Activity & Heart Module")
 
 if selected_dropdown == 'Caloric Model':
     dropdown_c_options = ['VeryActiveMinutes', 'LightlyActiveMinutes', 'SedentaryMinutes']
