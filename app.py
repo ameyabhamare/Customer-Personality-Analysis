@@ -8,6 +8,7 @@ import tkinter
 import matplotlib.pyplot as plt
 matplotlib.use('TkAgg')
 
+from activity_and_weight_analysis.activity_and_weight_analysis import plot_sleep_time_vs_time_in_bed, plot_daily_step_pattern, plot_daily_sleep_vs_step_count, plot_daily_calories_pattern
 
 st.title("FitMe")
 st.markdown("Fitness Explorer. This app performs health analysis based on fitness tracking data")
