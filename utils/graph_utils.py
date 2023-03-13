@@ -18,8 +18,20 @@ def create_barplot(x_axis, y_axis, color='r', **kwargs):
     return ax
 
 # sns.lineplot(data = df_sleep_and_steps['StepTotal'], marker='o', ax=ax1, color='g')
-def create_lineplot(**kwargs):
+def create_lineplot(xlabel='', ylabel='', title='', **kwargs):
     ax = sns.lineplot(**kwargs)
+    ax.set(xlabel=xlabel, ylabel=ylabel, title=title)
+    return ax
+
+def create_kdeplot(vals, xlabel='', ylabel='', title='', **kwargs):
+    ax = sns.kdeplot(vals, **kwargs)
+    ax.set(xlabel=xlabel, ylabel=ylabel, title=title)
+    return ax
+
+
+def create_boxplot(data, xlabel='', ylabel='', title='', **kwargs):
+    ax = sns.boxplot(data = data, **kwargs)
+    ax.set(xlabel=xlabel, ylabel=ylabel, title=title)
     return ax
 
 def plt_show():
