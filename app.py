@@ -86,14 +86,19 @@ if selected_dropdown == 'Activity & Weight':
     graph_utils.plt_show() # display
 
 if selected_dropdown == 'Caloric Model':
-    from caloric_model.model import model_pipeline
     dropdown_c_options = ['VeryActiveMinutes', 'LightlyActiveMinutes', 'SedentaryMinutes', 'ModeratelyActiveDistance', 'VeryActiveDistance', 'SedentaryActiveDistance']
     selected_c_dropdown = st.selectbox("Select Variable", options = dropdown_c_options)
     slider_val = st.slider(selected_c_dropdown, min(df[selected_c_dropdown]), max(df[selected_c_dropdown]), 1)
-    fig = plt.figure(figsize=(15, 8))
-    sns.regplot(data = df, x= selected_c_dropdown, y = 'Calories')
+
+    # load data
+    df_daily_calories_unproc = pd.read_csv("data/dailyCalories_merged.csv")
+
+    # process data
+    daily_calories_proc = calories_analysis.process_daily_calories_data(df_daily_calories_unproc)
+
+    sns.regplot(data = daily_calories_proc, x = selected_c_dropdown, y = 'Calories')
     st.pyplot(fig)
-    lr = model_pipeline(df, selected_c_dropdown)
+    lr = calories_analysis.calories_linreg_model(df, selected_c_dropdown)
     st.markdown("""
     <style>
     .big-font {
