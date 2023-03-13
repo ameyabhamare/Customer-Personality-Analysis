@@ -7,6 +7,7 @@ import pandas as pd
 import seaborn as sns
 from sklearn.linear_model import LinearRegression
 import matplotlib
+import tkinter
 matplotlib.use('TkAgg')
 
 st.title("FitMe")
