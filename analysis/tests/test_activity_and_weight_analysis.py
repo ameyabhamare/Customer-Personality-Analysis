@@ -7,7 +7,7 @@ from unittest.mock import patch
 
 sys.path.insert(0, (os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + "/../")))
 
-import activity_and_weight_analysis as testmodule
+import analysis as testmodule
 
 # set up mock data
 mock_df_sleep_data = pd.read_csv(os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + "/./mock_data/mock_sleepDay_merged.csv"))

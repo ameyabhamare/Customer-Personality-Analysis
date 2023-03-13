@@ -11,7 +11,7 @@ matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 from caloric_model.model import transform_dataframe
 
-from activity_and_weight_analysis import sleep_analysis, calories_analysis, steps_analysis, heartrate_analysis
+from analysis import sleep_analysis, calories_analysis, steps_analysis, heartrate_analysis
 from utils import graph_utils
 
 # if selected_dropdown == 'Heart Rate':

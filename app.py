@@ -10,7 +10,7 @@ import tkinter
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
-from activity_and_weight_analysis import sleep_analysis, calories_analysis, steps_analysis, heartrate_analysis, activity_analysis
+from analysis import sleep_analysis, calories_analysis, steps_analysis, heartrate_analysis, activity_analysis
 from utils import graph_utils
 
 st.title("FitMe")

@@ -1,1 +1,1 @@
-from activity_and_weight_analysis import sleep_analysis
+from analysis import sleep_analysis

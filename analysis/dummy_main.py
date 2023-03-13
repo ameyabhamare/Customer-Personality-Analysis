@@ -1,4 +1,4 @@
-from activity_and_weight_analysis import *
+from analysis import *
 import pandas as pd
 
 df_sleep_data_unproc = pd.read_csv("../data/sleepDay_merged.csv")
