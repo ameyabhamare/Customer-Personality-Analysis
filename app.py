@@ -69,24 +69,28 @@ if selected_dropdown == 'Activity & Weight':
     daily_steps_sleep_proc = steps_analysis.process_daily_sleep_steps_data(df_daily_steps_unproc, df_sleep_data_unproc)
     daily_calories_proc = calories_analysis.process_daily_calories_data(df_daily_calories_unproc)
 
-    # build graph viz
     # sleep analysis
-    graph_utils.create_barplot(x_axis=sleep_proc['SleepDate'], y_axis=sleep_proc['TotalTimeInBed'], color='r', xlabel='Date', ylabel='Minutes', title="Sleep activity analysis")
-    graph_utils.create_barplot(x_axis=sleep_proc['SleepDate'], y_axis=sleep_proc['TotalMinutesAsleep'], color='b', xlabel='Date', ylabel='Minutes', title="Sleep activity analysis")
-    graph_utils.plt_show() # display
+    fig_sleep, ax_sleep = graph_utils.create_fig()
+    graph_utils.create_barplot(ax=ax_sleep, x_axis=sleep_proc['SleepDate'], y_axis=sleep_proc['TotalTimeInBed'], color='r', xlabel='Date', ylabel='Minutes', title="Sleep activity analysis")
+    graph_utils.create_barplot(ax=ax_sleep, x_axis=sleep_proc['SleepDate'], y_axis=sleep_proc['TotalMinutesAsleep'], color='b', xlabel='Date', ylabel='Minutes', title="Sleep activity analysis")
 
     # daily steps analysis
-    graph_utils.create_barplot(x_axis=daily_steps_proc['ActivityDay'], y_axis=daily_steps_proc['StepTotal'], xlabel='Date', ylabel='Daily steps', title='Daily steps analysis')
-    graph_utils.plt_show() # display
+    fig_daily_steps, ax_daily_steps = graph_utils.create_fig()
+    graph_utils.create_barplot(ax=ax_daily_steps, x_axis=daily_steps_proc['ActivityDay'], y_axis=daily_steps_proc['StepTotal'], xlabel='Date', ylabel='Daily steps', title='Daily steps analysis')
 
     # daily sleep and steps analysis
-    sleep_ax = graph_utils.create_barplot(x_axis=daily_steps_sleep_proc['ActivityDay'], y_axis=daily_steps_sleep_proc['TotalMinutesAsleep'], xlabel='Date', ylabel='Minutes asleep', title='Daily steps sleep analysis')
-    graph_utils.create_lineplot(dat=daily_steps_sleep_proc['StepTotal'], ax=sleep_ax, marker='o', color='g')
-    graph_utils.plt_show() # display
+    fig_sleep_steps, ax_sleep_steps = graph_utils.create_fig()
+    graph_utils.create_barplot(ax=ax_sleep_steps, x_axis=daily_steps_sleep_proc['ActivityDay'], y_axis=daily_steps_sleep_proc['TotalMinutesAsleep'], xlabel='Date', ylabel='Minutes asleep', title='Daily steps sleep analysis')
+    graph_utils.create_lineplot(dat=daily_steps_sleep_proc['StepTotal'], ax=ax_sleep_steps, marker='o', color='g')
 
     # daily calories analysis
-    graph_utils.create_lineplot(data=daily_calories_proc, x='ActivityDay', y='Calories', marker='o', color='g')
-    graph_utils.plt_show() # display
+    fig_cals, ax_cals = graph_utils.create_fig()
+    graph_utils.create_lineplot(ax=ax_cals, data=daily_calories_proc, x='ActivityDay', y='Calories', marker='o', color='g')
+
+    st.pyplot(fig_sleep)
+    #st.pyplot(fig_daily_steps)
+    #st.pyplot(fig_sleep_steps)
+    #st.pyplot(fig_cals)
 
 if selected_dropdown == 'Caloric Model':
     # load data
@@ -95,7 +99,6 @@ if selected_dropdown == 'Caloric Model':
     dropdown_c_options = ['VeryActiveMinutes', 'LightlyActiveMinutes', 'SedentaryMinutes', 'ModeratelyActiveDistance', 'VeryActiveDistance', 'SedentaryActiveDistance']
     selected_c_dropdown = st.selectbox("Select Variable", options = dropdown_c_options)
     slider_val = st.slider(selected_c_dropdown, min(df_daily_activity_unproc[selected_c_dropdown]), max(df_daily_activity_unproc[selected_c_dropdown]), 1)
-    print(df_daily_activity_unproc)
 
     # process data
     df_daily_activity_proc = activity_analysis.process_daily_activity_data(df_daily_activity_unproc)
