@@ -1,5 +1,5 @@
 """
-This module spins up a app on localhost using the streamlit library
+This module spins up FitMe on localhost using the streamlit library
 """
 import matplotlib.pyplot as plt
 import streamlit as st
