@@ -34,22 +34,27 @@ if selected_dropdown == 'Heart Rate':
     # process data
     heartrate_proc = heartrate_analysis.process_heartrate_data(df_heartrate_unproc, df_sleep_data_unproc)
 
-    # build graph viz
     # daily bpm
-    graph_utils.create_lineplot(xlabel='Date', ylabel='Daily BPM', data=heartrate_proc, x='date_time', y='Value', title="Average daily BPM")
-    graph_utils.plt_show()
-
+    fig_daily_bpm, ax_daily_bpm = graph_utils.create_fig()
+    graph_utils.create_lineplot(ax=ax_daily_bpm, xlabel='Date', ylabel='Daily BPM', data=heartrate_proc, x='date_time', y='Value', title="Average daily BPM")
+    
     # weekly bpm
-    graph_utils.create_lineplot(xlabel='Date', ylabel='Weekly BPM', data=heartrate_proc, x='day_of_week', y='Value', title="Average weekly BPM")
-    graph_utils.plt_show()
+    fig_weekly_bpm, ax_weekly_bpm = graph_utils.create_fig()
+    graph_utils.create_lineplot(ax=ax_weekly_bpm, xlabel='Date', ylabel='Weekly BPM', data=heartrate_proc, x='day_of_week', y='Value', title="Average weekly BPM")
 
     # bpm density
-    graph_utils.create_kdeplot(heartrate_proc['Value'], xlabel='BPM', ylabel='Distribution', shade=True, legend=False, title="BPM Distribution")
-    graph_utils.plt_show()
+    fig_density_bpm, ax_density_bpm = graph_utils.create_fig()
+    graph_utils.create_kdeplot(heartrate_proc['Value'], ax=ax_density_bpm, xlabel='BPM', ylabel='Distribution', shade=True, legend=False, title="BPM Distribution")
 
     # box plot bpm
-    graph_utils.create_boxplot(data=heartrate_proc, x='Sleep Duration', y='Value', xlabel='Sleep duration in minutes', ylabel='BPM', title="Sleep quality analysis")
-    graph_utils.plt_show()
+    fig_box_plot_bpm, ax_box_plot_bpm = graph_utils.create_fig()
+    graph_utils.create_boxplot(ax=ax_box_plot_bpm, data=heartrate_proc, x='Sleep Duration', y='Value', xlabel='Sleep duration in minutes', ylabel='BPM', title="Sleep quality analysis")
+
+    st.pyplot(fig_daily_bpm)
+    st.pyplot(fig_weekly_bpm)
+    st.pyplot(fig_density_bpm)
+    st.pyplot(fig_box_plot_bpm)
+    
     
 # Activity and weight analysis
 if selected_dropdown == 'Activity & Weight':

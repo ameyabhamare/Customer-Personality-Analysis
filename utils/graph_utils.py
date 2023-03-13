@@ -1,6 +1,10 @@
 import seaborn as sns
 import matplotlib.pyplot as plt
 
+def create_fig(**kwargs):
+    fig, ax = plt.subplots(**kwargs)
+    return fig, ax
+
 def create_barplot(x_axis, y_axis, color='r', **kwargs):
     ax = sns.barplot(x=x_axis, y=y_axis, color=color)
     ax.set(**kwargs)
