@@ -4,7 +4,6 @@ from utils import analysis_utils
 
 def process_daily_activity_data(df_daily_activity, user_id='1503960366'):
     df_daily_activity = analysis_utils.filter_df_user_id(df_daily_activity, user_id)
-    day_mapping = {0: 'Mon', 1: 'Tue', 2: 'Wed', 3: 'Thu', 4: 'Fri', 5: 'Sat', 6: 'Sun' }
 
     df_daily_activity['ActivityDate'] = pd.to_datetime(df_daily_activity['ActivityDate'])
     df_daily_activity['year'] = df_daily_activity['ActivityDate'].dt.year
