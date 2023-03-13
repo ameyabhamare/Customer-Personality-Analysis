@@ -9,6 +9,7 @@ Human temporal routine behavioral analysis and pattern recognition.
 
 ### Installation instructions
 - Install dev dependencies by running `pip install -r requirements.txt`
+- Download the [FitBit Kaggle dataset](https://www.kaggle.com/datasets/arashnic/fitbit) and extract it to the `data/` directory at the root of this project.
 
 ### Running the app
 - We conveniently have a `./run.sh` script you can run to start the application. 

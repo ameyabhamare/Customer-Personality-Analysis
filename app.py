@@ -40,9 +40,9 @@ if selected_dropdown == 'Heart Rate':
 # Activity and weight analysis
 if selected_dropdown == 'Activity & Weight':
     # load data
-    df_sleep_data_unproc = pd.read_csv("database/sleepDay_merged.csv")
-    df_daily_steps_unproc = pd.read_csv("database/dailySteps_merged.csv")
-    df_daily_calories_unproc = pd.read_csv("database/dailyCalories_merged.csv")
+    df_sleep_data_unproc = pd.read_csv("data/sleepDay_merged.csv")
+    df_daily_steps_unproc = pd.read_csv("data/dailySteps_merged.csv")
+    df_daily_calories_unproc = pd.read_csv("data/dailyCalories_merged.csv")
 
     # process data
     sleep_proc = sleep_analysis.process_sleep_analysis_data(df_sleep_data_unproc)
