@@ -9,10 +9,10 @@ def plot_daily_heart_rate(daily_values, user_id = None):
     '''
     A method to generate a graph that displays how heart rate varies day-over-day
     Arguments:
-    daily_values - The merged dataset containing heart rate and sleep information on a daily level
-    user_id (None: optional) - The user id
-    Return value:
-    None
+        daily_values - The merged dataset containing heart rate and sleep information on a daily level
+        user_id (None: optional) - The user id
+    Returns:
+        None
     '''
     if user_id is None:
         user_id = '2026352035'
@@ -28,10 +28,10 @@ def plot_weekly_heart_rate(daily_values, user_id = None):
     '''
     A method to generate a graph that displays how heart rate varies across days of the week
     Arguments:
-    daily_values - The merged dataset containing heart rate and sleep information on a daily level
-    user_id (None: optional) - The user id
-    Return value:
-    None
+        daily_values - The merged dataset containing heart rate and sleep information on a daily level
+        user_id (None: optional) - The user id
+    Returns:
+        None
     '''
     if user_id is None:
         user_id = '2026352035'
@@ -43,15 +43,15 @@ def plot_weekly_heart_rate(daily_values, user_id = None):
     plt.show()
 
 def plot_bpm_density(daily_values, user_id = None):
-    '''
+    """
     A method to generate a graph that displays the density of bpm
     across the time duration that the dataset spans
     Arguments:
-    daily_values - The merged dataset containing heart rate and sleep information on a daily level
-    user_id (None: optional) - The user id
-    Return value:
-    None
-    '''
+        daily_values - The merged dataset containing heart rate and sleep information on a daily level
+        user_id (None: optional) - The user id
+    Returns:
+        None
+    """
     if user_id is None:
         user_id = '2026352035'
     daily_values = daily_values.query(f"Id == {user_id}")
@@ -63,14 +63,14 @@ def plot_bpm_density(daily_values, user_id = None):
     plt.show()
     
 def plot_sleep_vs_bpm(daily_values, user_id = None):
-    '''
+    """
     A method to generate a graph that displays how the heart-rate relates to the duration of sleep
     Arguments:
-    daily_values - The merged dataset containing heart rate and sleep information on a daily level
-    user_id (None: optional) - The user id
-    Return value:
-    None
-    '''
+        daily_values - The merged dataset containing heart rate and sleep information on a daily level
+        user_id (None: optional) - The user id
+    Returns:
+        None
+    """
     if user_id is None:
         user_id = '2026352035'
     daily_values = daily_values.query(f"Id == {user_id}")
@@ -81,13 +81,13 @@ def plot_sleep_vs_bpm(daily_values, user_id = None):
     plt.show()
     
 def create_final_df():
-    '''
+    """
     A method to process and merge the heart rate and sleep datasets
     Arguments:
-    None
-    Return value:
-    A merged dataset containing heart rate data on a seconds level and sleep information on a daily level
-    '''
+        None
+    Returns:
+        A merged dataset containing heart rate data on a seconds level and sleep information on a daily level
+    """
     heartrate_seconds = pd.read_csv('heart_rate_analysis/tests/mock_data/heartrate_seconds_merged.csv')
     daily_sleep = pd.read_csv('heart_rate_analysis/tests/mock_data/sleepDay_merged.csv')
     heartrate_seconds['date_time'] = pd.to_datetime(heartrate_seconds['Time'],
