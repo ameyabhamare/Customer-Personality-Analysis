@@ -120,12 +120,9 @@ if selected_dropdown == 'Activity & Weight':
         print("Error in Activity & Heart Module")
 
 if selected_dropdown == 'Caloric Model':
-    dropdown_c_options = ['VeryActiveMinutes', 'LightlyActiveMinutes', 'SedentaryMinutes']
+    dropdown_c_options = ['VeryActiveMinutes', 'LightlyActiveMinutes', 'SedentaryMinutes', 'ModeratelyActiveDistance', 'VeryActiveDistance', 'SedentaryActiveDistance']
     selected_c_dropdown = st.selectbox("Select Variable", options = dropdown_c_options)
     slider_val = st.slider(selected_c_dropdown, min(df[selected_c_dropdown]), max(df[selected_c_dropdown]), 1)
-    # st.slider('Feature 2', 0, 10, 1)
-    # st.slider('Feature 3', 0, 10, 1)
-    # st.slider('Feature 4', 0, 10, 1)
     fig = plt.figure(figsize=(15, 8))
     sns.regplot(data = df, x= selected_c_dropdown, y = 'Calories')
     st.pyplot(fig)
