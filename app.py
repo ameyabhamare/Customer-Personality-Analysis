@@ -1,14 +1,8 @@
 """
 This module spins up FitMe on localhost using the streamlit library
 """
-import matplotlib.pyplot as plt
 import streamlit as st
 import pandas as pd
-import seaborn as sns
-import matplotlib
-import tkinter
-matplotlib.use('TkAgg')
-import matplotlib.pyplot as plt
 
 from analysis import sleep_analysis, calories_analysis, steps_analysis, heartrate_analysis, activity_analysis
 from utils import graph_utils
@@ -23,7 +17,7 @@ files = st.sidebar.file_uploader("Please choose a csv file", accept_multiple_fil
 for file_ in files:
     file_name = file_.name
     file_path = f'data/{file_name}'
-    df = pd.read_csv(file_path)
+    # df = pd.read_csv(file_path)
     
 # Heart rate analysis
 if selected_dropdown == 'Heart Rate':
@@ -88,9 +82,9 @@ if selected_dropdown == 'Activity & Weight':
     graph_utils.create_lineplot(ax=ax_cals, data=daily_calories_proc, x='ActivityDay', y='Calories', marker='o', color='g')
 
     st.pyplot(fig_sleep)
-    #st.pyplot(fig_daily_steps)
-    #st.pyplot(fig_sleep_steps)
-    #st.pyplot(fig_cals)
+    st.pyplot(fig_daily_steps)
+    st.pyplot(fig_sleep_steps)
+    st.pyplot(fig_cals)
 
 if selected_dropdown == 'Caloric Model':
     # load data
