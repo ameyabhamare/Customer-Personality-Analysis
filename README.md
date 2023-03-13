@@ -15,6 +15,8 @@ Human temporal routine behavioral analysis and pattern recognition.
 OR
 - Otherwise, you can use the `streamlit run app.py` command to run the application **after** installing the Python dependencies through pip.
 
+### Testing
+
 
 ### Questions
 We propose a tool **FitMe** that allows you to feed in your smart watch data to provide you with answer to questions

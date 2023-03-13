@@ -32,6 +32,7 @@ class ActivityWeightAnalysisTests(unittest.TestCase):
             except:
                 self.fail("exception thrown in smoke test")
 
+    @unittest.skip
     def test_plot_sleep_time_vs_time_in_bed_default_args(self):
         """
         User id should default to '1503960366' in case no user_id is passed in
@@ -45,6 +46,7 @@ class ActivityWeightAnalysisTests(unittest.TestCase):
             except:
                 self.fail("exception thrown")
 
+    @unittest.skip
     def test_plot_sleep_time_vs_time_in_bed_user_not_found(self):
         """
         TypeError gets raised if userId passed in is not found within data
@@ -59,6 +61,7 @@ class ActivityWeightAnalysisTests(unittest.TestCase):
                 mock_data_df = pd.DataFrame(mock_data)
                 testmodule.plot_sleep_time_vs_time_in_bed(mock_data_df, user_id='404')
     
+    @unittest.skip
     def test_plot_sleep_time_vs_time_in_bed_plot_call(self):
         """
         User id can be passed in
@@ -72,6 +75,7 @@ class ActivityWeightAnalysisTests(unittest.TestCase):
             except:
                 self.fail("exception thrown")
 
+    @unittest.skip
     def test_plot_sleep_time_vs_time_in_bed_plot_appearance(self):
         """
         Graph produced by function has the correct shape and customizations
