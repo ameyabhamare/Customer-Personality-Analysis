@@ -3,6 +3,19 @@
 ### Theme 
 Human temporal routine behavioral analysis and pattern recognition.
 
+## Development Environment
+*We encourage using [pyenv](https://github.com/pyenv/pyenv) to set up and configure your Python development environment.*
+*This repo was built using Python 3.8.5*
+
+### Installation instructions
+- Install dev dependencies by running `pip install -r requirements.txt`
+
+### Running the app
+- We conveniently have a `./run.sh` script you can run to start the application. 
+OR
+- Otherwise, you can use the `streamlit run app.py` command to run the application **after** installing the Python dependencies through pip.
+
+
 ### Questions
 We propose a tool **FitMe** that allows you to feed in your smart watch data to provide you with answer to questions
 * How active are your days? Do you spend a considerable amount of time being sedentary?
