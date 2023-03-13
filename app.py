@@ -1,34 +1,16 @@
 import streamlit as st
 import pandas as pd
 import seaborn as sns
-from sklearn.linear_model import LinearRegression
 import matplotlib
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
+from caloric_model.model import transform_dataframe
 
 st.title("FitMe")
 st.markdown("Fitness Explorer. This app performs health analysis based on fitness tracking data")
 files = st.sidebar.file_uploader("Please choose a csv file", accept_multiple_files = True)
 dropdown_options = ['Heart Rate', 'Activity & Weight', 'Caloric Model']
 selected_dropdown = st.sidebar.selectbox("Select Analysis", options = dropdown_options)
-
-#Add new features/columns to the dataframs
-def transform_dataframe(df):
-    df['ActivityDate'] = pd.to_datetime(df['ActivityDate'])
-    df['year'] = df['ActivityDate'].dt.year
-    df['month'] = df['ActivityDate'].dt.month
-    df['dayofweek'] = df['ActivityDate'].dt.dayofweek
-    df['dayofweek'] = df['dayofweek'].map({0: 'Mon', 1: 'Tue', 2: 'Wed', 3: 'Thu', 4: 'Fri', 5: 'Sat', 6: 'Sun' })
-    return df
-
-#This function is for the caloric model module
-def model_pipeline(df, x, y):
-    X = df.loc[:, x].values.reshape(-1, 1)  # values converts it into a numpy array
-    Y = df.loc[:, 'Calories'].values.reshape(-1, 1)  # -1 means that calculate the dimension of rows, but have 1 column
-    linear_regressor = LinearRegression()  # create object for the class
-    linear_regressor.fit(X, Y)  # perform linear regression
-    #Y_pred = linear_regressor.predict(X)  # make predictions
-    return linear_regressor
 
 #Processing multiple files in the user selection dropdown
 for file_ in files:
@@ -38,7 +20,7 @@ for file_ in files:
     df = transform_dataframe(df)
         
 # Heart rate analysis
-if selected_dropdown == 'Heart Rate':   
+if selected_dropdown == 'Heart Rate':
     from heart_rate_analysis.heart_rate_analysis import *          
     daily_values = create_final_df()
     plot_daily_heart_rate(daily_values, user_id = None)
@@ -59,11 +41,19 @@ if selected_dropdown == 'Activity & Weight':
         df_daily_calories_proc = plot_daily_calories_pattern(df_daily_calories_unproc, user_id=None)
 
 if selected_dropdown == 'Caloric Model':
+    from caloric_model.model import model_pipeline
     dropdown_c_options = ['VeryActiveMinutes', 'LightlyActiveMinutes', 'SedentaryMinutes', 'ModeratelyActiveDistance', 'VeryActiveDistance', 'SedentaryActiveDistance']
     selected_c_dropdown = st.selectbox("Select Variable", options = dropdown_c_options)
     slider_val = st.slider(selected_c_dropdown, min(df[selected_c_dropdown]), max(df[selected_c_dropdown]), 1)
     fig = plt.figure(figsize=(15, 8))
     sns.regplot(data = df, x= selected_c_dropdown, y = 'Calories')
     st.pyplot(fig)
-    lr = model_pipeline(df, selected_c_dropdown, 'Calories')
-    st.write(f"Model Daily Caloric: {round(lr.predict([[slider_val]])[0][0], 2)}")
+    lr = model_pipeline(df, selected_c_dropdown)
+    st.markdown("""
+    <style>
+    .big-font {
+        font-size:50px !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    st.markdown(f'<p class="big-font">Model Daily Caloric: {round(lr.predict([[slider_val]])[0][0], 2)}</p>', unsafe_allow_html=True)
