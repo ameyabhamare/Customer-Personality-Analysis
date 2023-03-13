@@ -12,7 +12,7 @@ files = st.sidebar.file_uploader("Please choose a csv file", accept_multiple_fil
 dropdown_options = ['Heart Rate', 'Activity & Weight', 'Caloric Model']
 selected_dropdown = st.sidebar.selectbox("Select Analysis", options = dropdown_options)
 
-#Add new features/columns to the dataframs
+# Add new features/columns to the dataframes
 def transform_dataframe(df):
     df['ActivityDate'] = pd.to_datetime(df['ActivityDate'])
     df['year'] = df['ActivityDate'].dt.year
@@ -39,7 +39,8 @@ for file_ in files:
         
 # Heart rate analysis
 if selected_dropdown == 'Heart Rate':   
-    from heart_rate_analysis.heart_rate_analysis import *          
+    from heart_rate_analysis.heart_rate_analysis import create_final_df,\
+    plot_daily_heart_rate, plot_weekly_heart_rate, plot_bpm_density, plot_sleep_vs_bpm
     daily_values = create_final_df()
     plot_daily_heart_rate(daily_values, user_id = None)
     plot_weekly_heart_rate(daily_values, user_id = None)
