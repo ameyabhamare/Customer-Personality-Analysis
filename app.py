@@ -21,7 +21,7 @@ def transform_dataframe(df):
     df['dayofweek'] = df['dayofweek'].map({0: 'Mon', 1: 'Tue', 2: 'Wed', 3: 'Thu', 4: 'Fri', 5: 'Sat', 6: 'Sun' })
     return df
 
-#This function is for the caloric model module
+# This function is for the caloric model module
 def model_pipeline(df, x, y):
     X = df.loc[:, x].values.reshape(-1, 1)  # values converts it into a numpy array
     Y = df.loc[:, 'Calories'].values.reshape(-1, 1)  # -1 means that calculate the dimension of rows, but have 1 column
@@ -30,7 +30,7 @@ def model_pipeline(df, x, y):
     #Y_pred = linear_regressor.predict(X)  # make predictions
     return linear_regressor
 
-#Processing multiple files in the user selection dropdown
+# Processing multiple files in the user selection dropdown
 for file_ in files:
     file_name = file_.name
     file_path = f'data/{file_name}'
