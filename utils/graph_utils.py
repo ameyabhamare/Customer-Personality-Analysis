@@ -32,6 +32,10 @@ def create_boxplot(data, xlabel='', ylabel='', title='', **kwargs):
     ax.tick_params(labelrotation=90)
     return ax
 
+def create_regplot(**kwargs):
+    ax = sns.regplot(**kwargs)
+    return ax
+
 def plt_show():
     plt.xticks(rotation=90)
     plt.show()

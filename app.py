@@ -89,17 +89,18 @@ if selected_dropdown == 'Activity & Weight':
 if selected_dropdown == 'Caloric Model':
     # load data
     df_daily_activity_unproc = pd.read_csv("data/dailyActivity_merged.csv")
-
     dropdown_c_options = ['VeryActiveMinutes', 'LightlyActiveMinutes', 'SedentaryMinutes', 'ModeratelyActiveDistance', 'VeryActiveDistance', 'SedentaryActiveDistance']
     selected_c_dropdown = st.selectbox("Select Variable", options = dropdown_c_options)
-    slider_val = st.slider(selected_c_dropdown, min(df_daily_activity_unproc[selected_c_dropdown]), max(df_daily_activity_unproc[selected_c_dropdown]), 1)
+    slider_val = st.slider(selected_c_dropdown, round(min(df_daily_activity_unproc[selected_c_dropdown])), round(max(df_daily_activity_unproc[selected_c_dropdown])), 1)
 
     # process data
     df_daily_activity_proc = activity_analysis.process_daily_activity_data(df_daily_activity_unproc)
 
-    sns.regplot(data = df_daily_activity_proc, x = selected_c_dropdown, y = 'Calories')
+    fig, ax = graph_utils.create_fig()
+    graph_utils.create_regplot(ax=ax, data = df_daily_activity_proc, x = selected_c_dropdown, y = 'Calories')
     st.pyplot(fig)
     lr = activity_analysis.daily_activity_calories_linreg_model(df_daily_activity_proc, selected_c_dropdown)
+
     st.markdown("""
     <style>
     .big-font {
