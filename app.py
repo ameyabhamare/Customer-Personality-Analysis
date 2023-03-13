@@ -13,9 +13,9 @@ from caloric_model.model import transform_dataframe
 
 st.title("FitMe")
 st.markdown("Fitness Explorer. This app performs health analysis based on fitness tracking data")
-files = st.sidebar.file_uploader("Please choose a csv file", accept_multiple_files = True)
 dropdown_options = ['Heart Rate', 'Activity & Weight', 'Caloric Model']
 selected_dropdown = st.sidebar.selectbox("Select Analysis", options = dropdown_options)
+files = st.sidebar.file_uploader("Please choose a csv file", accept_multiple_files = True)
 
 #Processing multiple files in the user selection dropdown
 for file_ in files:
