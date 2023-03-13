@@ -65,6 +65,7 @@ if selected_dropdown == 'Heart Rate':
     plot_weekly_heart_rate(daily_values, user_id = None)
     plot_bpm_density(daily_values, user_id = None)
     plot_sleep_vs_bpm(daily_values, user_id = None)
+    
 # Activity and weight analysis
 if selected_dropdown == 'Activity & Weight':
     from activity_and_weight_analysis.activity_and_weight_analysis import plot_sleep_time_vs_time_in_bed,\
