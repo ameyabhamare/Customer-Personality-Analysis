@@ -20,17 +20,26 @@ def plot_sleep_time_vs_time_in_bed(df_sleep_data, user_id=None):
     """
     if user_id is None:
         user_id = '1503960366'
-    df_sleep_data = df_sleep_data.query(f"Id == {user_id}")
+        
+    df_sleep_data = df_sleep_data.query(f"Id == {int(user_id)}")
+    if df_sleep_data.empty:
+        raise TypeError("Invalid user id")
+    
     df_sleep_data['SleepDate'] = df_sleep_data.apply(lambda x: x['SleepDay'].split(" ")[0], axis=1)
     df_sleep_data = df_sleep_data.drop(['SleepDay', 'TotalSleepRecords'], axis=1)
+    
     ax_1 = plt.subplots(figsize=(12,6))
     ax_1 = sns.barplot(x=df_sleep_data["SleepDate"],
                         y=df_sleep_data["TotalTimeInBed"], color='r' )
     ax_1 = sns.barplot(x=df_sleep_data["SleepDate"],
                         y=df_sleep_data["TotalMinutesAsleep"], color='b')
+    
     ax_1.set(xlabel="Date", ylabel="Minutes")
+    ax_1.set_title("Time asleep and time in bed")
+    
     plt.xticks(rotation=90)
     plt.show()
+    
     return df_sleep_data, ax_1
 
 def plot_daily_step_pattern(df_daily_steps, user_id=None):
