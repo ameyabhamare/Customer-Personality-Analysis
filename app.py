@@ -9,9 +9,8 @@ import matplotlib
 import tkinter
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
-from caloric_model.model import transform_dataframe
 
-from activity_and_weight_analysis import sleep_analysis, calories_analysis, steps_analysis, heartrate_analysis
+from activity_and_weight_analysis import sleep_analysis, calories_analysis, steps_analysis, heartrate_analysis, activity_analysis
 from utils import graph_utils
 
 st.title("FitMe")
@@ -25,7 +24,6 @@ for file_ in files:
     file_name = file_.name
     file_path = f'data/{file_name}'
     df = pd.read_csv(file_path)
-    df = transform_dataframe(df)
     
 # Heart rate analysis
 if selected_dropdown == 'Heart Rate':
@@ -86,19 +84,20 @@ if selected_dropdown == 'Activity & Weight':
     graph_utils.plt_show() # display
 
 if selected_dropdown == 'Caloric Model':
+    # load data
+    df_daily_activity_unproc = pd.read_csv("data/dailyActivity_merged.csv")
+
     dropdown_c_options = ['VeryActiveMinutes', 'LightlyActiveMinutes', 'SedentaryMinutes', 'ModeratelyActiveDistance', 'VeryActiveDistance', 'SedentaryActiveDistance']
     selected_c_dropdown = st.selectbox("Select Variable", options = dropdown_c_options)
-    slider_val = st.slider(selected_c_dropdown, min(df[selected_c_dropdown]), max(df[selected_c_dropdown]), 1)
-
-    # load data
-    df_daily_calories_unproc = pd.read_csv("data/dailyCalories_merged.csv")
+    slider_val = st.slider(selected_c_dropdown, min(df_daily_activity_unproc[selected_c_dropdown]), max(df_daily_activity_unproc[selected_c_dropdown]), 1)
+    print(df_daily_activity_unproc)
 
     # process data
-    daily_calories_proc = calories_analysis.process_daily_calories_data(df_daily_calories_unproc)
+    df_daily_activity_proc = activity_analysis.process_daily_activity_data(df_daily_activity_unproc)
 
-    sns.regplot(data = daily_calories_proc, x = selected_c_dropdown, y = 'Calories')
+    sns.regplot(data = df_daily_activity_proc, x = selected_c_dropdown, y = 'Calories')
     st.pyplot(fig)
-    lr = calories_analysis.calories_linreg_model(df, selected_c_dropdown)
+    lr = activity_analysis.daily_activity_calories_linreg_model(df_daily_activity_proc, selected_c_dropdown)
     st.markdown("""
     <style>
     .big-font {
