@@ -1,3 +1,7 @@
+"""
+This module spins up FitMe on localhost using the streamlit library
+"""
+import matplotlib.pyplot as plt
 import streamlit as st
 import pandas as pd
 import seaborn as sns
@@ -18,27 +22,30 @@ for file_ in files:
     file_path = f'data/{file_name}'
     df = pd.read_csv(file_path)
     df = transform_dataframe(df)
-        
+    
 # Heart rate analysis
 if selected_dropdown == 'Heart Rate':
-    from heart_rate_analysis.heart_rate_analysis import *          
+    from heart_rate_analysis.heart_rate_analysis import create_final_df,\
+    plot_daily_heart_rate, plot_weekly_heart_rate, plot_bpm_density, plot_sleep_vs_bpm
     daily_values = create_final_df()
     plot_daily_heart_rate(daily_values, user_id = None)
     plot_weekly_heart_rate(daily_values, user_id = None)
     plot_bpm_density(daily_values, user_id = None)
     plot_sleep_vs_bpm(daily_values, user_id = None)
-        
+    
+# Activity and weight analysis
 if selected_dropdown == 'Activity & Weight':
-        from activity_and_weight_analysis.activity_and_weight_analysis import *
-        df_sleep_data_unproc = pd.read_csv("database/sleepDay_merged.csv")
-        df_daily_steps_unproc = pd.read_csv("database/dailySteps_merged.csv")
-        df_daily_calories_unproc = pd.read_csv("database/dailyCalories_merged.csv")
-        df_sleep_data_proc = plot_sleep_time_vs_time_in_bed(df_sleep_data_unproc, '1503960366')
-        df_daily_steps_proc = plot_daily_step_pattern(df_daily_steps_unproc, user_id=None)
-        df_sleep_and_steps_merged = pd.merge(df_daily_steps_proc, df_sleep_data_proc, how='inner',
-                                        left_on='ActivityDay', right_on='SleepDate')
-        plot_daily_sleep_vs_step_count(df_sleep_and_steps_merged)
-        df_daily_calories_proc = plot_daily_calories_pattern(df_daily_calories_unproc, user_id=None)
+    from activity_and_weight_analysis.activity_and_weight_analysis import plot_sleep_time_vs_time_in_bed,\
+    plot_daily_step_pattern, plot_daily_sleep_vs_step_count, plot_daily_calories_pattern
+    df_sleep_data_unproc = pd.read_csv("database/sleepDay_merged.csv")
+    df_daily_steps_unproc = pd.read_csv("database/dailySteps_merged.csv")
+    df_daily_calories_unproc = pd.read_csv("database/dailyCalories_merged.csv")
+    df_sleep_data_proc = plot_sleep_time_vs_time_in_bed(df_sleep_data_unproc, '1503960366')
+    df_daily_steps_proc = plot_daily_step_pattern(df_daily_steps_unproc, user_id=None)
+    df_sleep_and_steps_merged = pd.merge(df_daily_steps_proc, df_sleep_data_proc, how='inner',
+                                    left_on='ActivityDay', right_on='SleepDate')
+    plot_daily_sleep_vs_step_count(df_sleep_and_steps_merged)
+    df_daily_calories_proc = plot_daily_calories_pattern(df_daily_calories_unproc, user_id=None)
 
 if selected_dropdown == 'Caloric Model':
     from caloric_model.model import model_pipeline
