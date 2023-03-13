@@ -94,8 +94,7 @@ def create_final_df():
         A merged dataset containing heart rate data on a seconds level 
         and sleep information on a daily level
     """
-    heartrate_seconds = pd.read_csv('heart_rate_analysis/tests/mock_data\
-                                    /heartrate_seconds_merged.csv')
+    heartrate_seconds = pd.read_csv('heart_rate_analysis/tests/mock_data/heartrate_seconds_merged.csv')
     daily_sleep = pd.read_csv('heart_rate_analysis/tests/mock_data/sleepDay_merged.csv')
     heartrate_seconds['date_time'] = pd.to_datetime(heartrate_seconds['Time'],
                                                     format = "%m/%d/%Y %I:%M:%S %p")

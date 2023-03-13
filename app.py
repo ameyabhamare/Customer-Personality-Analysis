@@ -6,6 +6,7 @@ import streamlit as st
 import pandas as pd
 import seaborn as sns
 import matplotlib
+import tkinter
 matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 from caloric_model.model import transform_dataframe
