@@ -48,3 +48,6 @@ The [FitBit Fitness Tracker Data](https://www.kaggle.com/datasets/arashnic/fitbi
 
 ### Contributors
 Ameya Bhamare, Akshit Miglani, Harshit Rai, Jeremie Poisson
+
+### Contact for support
+Akshit Miglani: amiglani@uw.edu
