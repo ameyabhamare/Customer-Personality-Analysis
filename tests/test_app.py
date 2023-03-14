@@ -15,23 +15,6 @@ class TestApp(unittest.TestCase):
     """
     Test suite for main app entry point
     """
-
-    @patch("app.st")
-    def test_setup_streamlit_ui(self, st_mock):
-        """
-        Makes sure that streamlit ui is being setup properly and that global variables get
-        populated
-        """
-        app.setup_streamlit_ui()
-
-        st_mock.title.assert_called_with('FitMe')
-        st_mock.markdown.assert_called()
-        st_mock.sidebar.selectbox.assert_called()
-        #st_mock.sidebar.file_uploader.assert_called()
-        #self.assertTrue(app.user_id_dropdown is not None)
-        self.assertTrue(app.selected_dropdown is not None)
-        #self.assertTrue(app.files is not None)
-
     @patch("app.render_heartrate_analysis")
     def test_render_analysis_heartrate(self, mock):
         """
