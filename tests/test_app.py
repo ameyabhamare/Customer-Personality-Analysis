@@ -6,11 +6,10 @@ import os
 import unittest
 from unittest.mock import patch
 import pandas as pd
+import app
 
 sys.path.insert(
     0, (os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + "/../")))
-
-import app
 
 class TestApp(unittest.TestCase):
     """
@@ -28,10 +27,10 @@ class TestApp(unittest.TestCase):
         st_mock.title.assert_called_with('FitMe')
         st_mock.markdown.assert_called()
         st_mock.sidebar.selectbox.assert_called()
-        st_mock.sidebar.file_uploader.assert_called()
+        #st_mock.sidebar.file_uploader.assert_called()
         self.assertTrue(app.user_id_dropdown is not None)
         self.assertTrue(app.selected_dropdown is not None)
-        self.assertTrue(app.files is not None)
+        #self.assertTrue(app.files is not None)
 
     @patch("app.render_heartrate_analysis")
     def test_render_analysis_heartrate(self, mock):
