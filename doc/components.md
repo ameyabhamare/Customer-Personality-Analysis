@@ -47,3 +47,21 @@ Contains data processing logic for heartrate analysis.
 Contains data processing logic for sleep analysis,
 - Given the raw DataFrame from the `sleepDay_merged.csv` dataset, it will clean the date column to be properly displayed within the graph in `app.py`
 
+## Sample sequence diagram
+Below is a sample sequence diagram for the heartrate analysis to display the different graph and renders it to the streamlit UI. The flow is virtually the same for the other analyses.
+
+
+```mermaid
+sequenceDiagram
+    FitMe/app.py->>FitMe/Analysis/heartrate_analysis.py: process_heartrate_data()
+    FitMe/Analysis/heartrate_analysis.py-->>FitMe/app.py: processed heartrate data
+    FitMe/app.py->>FitMe/Utils/graph_utils.py: create_fig(**kwargs)
+    FitMe/Utils/graph_utils.py->>matplotlib: create_subplots(**kwargs)
+    matplotlib-->>FitMe/Utils/graph_utils.py: (<figure object>, <axis object>)
+    FitMe/Utils/graph_utils.py-->>FitMe/app.py: (<figure object>, <axis object>)
+    
+    FitMe/Utils/graph_utils.py->>seaborn: create_lineplot(processed hr data, <figure object>)
+    FitMe/Utils/graph_utils.py->>seaborn: create_kdeplot(processed hr data, <figure object>)
+    FitMe/Utils/graph_utils.py->>seaborn: create_boxplot(processed hr data, <figure object>)
+    FitMe/app.py->>streamlit: pyplot(<axis object>, <figure object>)
+```
