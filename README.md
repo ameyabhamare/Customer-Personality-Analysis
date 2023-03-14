@@ -61,7 +61,7 @@ To deploy to `production`, dev can simply push on the Heroku remote `git push he
 We provided a `.pylintrc` file for you to use and configure your dev environment. 
 
 ### Questions
-We propose a tool **FitMe** that allows you to feed in your smart watch data to provide you with answer to questions
+Our tool **FitMe** allows you to feed in your smart watch data to provide you with answer to questions like:
 * How active are your days? Do you spend a considerable amount of time being sedentary?
 * How does this data vary on weekdays vs weekends?
 * What factors contribute to the highest calorie burn?
@@ -74,7 +74,7 @@ We propose a tool **FitMe** that allows you to feed in your smart watch data to 
 The [FitBit Fitness Tracker Data](https://www.kaggle.com/datasets/arashnic/fitbit) is a rich collection of 18 different csv files that collates information about daily activities, calorie, heartrate, sleep cycles, intensities and steps, among others.
 
 ### Contributors
-Ameya Bhamare, Akshit Miglani, Harshit Rai, Jeremie Poisson
-
-### Contact for support
+Ameya Bhamare: ameyarb@uw.edu
 Akshit Miglani: amiglani@uw.edu
+Harshit Rai: harshit@uw.edu
+Jeremie Poisson: jepoisso@uw.edu
