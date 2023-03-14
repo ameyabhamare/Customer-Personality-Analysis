@@ -24,6 +24,16 @@ class TestProcessHeartrateData(unittest.TestCase):
             'Id': [2026352035, 2026352035, 2026352035]
         })
 
+    @patch('analysis.heartrate_analysis.analysis_utils.filter_df_user_id')
+    def test_process_heartrate_data_filter_user_id(self, mock_filter_df_user_id):
+        # Set up mock return value
+        mock_filter_df_user_id.side_effect = [self.df_heartrate, self.df_daily_sleep]
+
+        # Call the function with the mock data
+        analysis.heartrate_analysis.process_heartrate_data(self.df_heartrate, self.df_daily_sleep, '1503960366')
+        
+        self.assertEqual(len(mock_filter_df_user_id.mock_calls), 2)
+
     def test_process_heartrate_data(self):
         expected_output = pd.DataFrame({
             'date_time': [datetime.datetime(2022, 4, 1), datetime.datetime(2022, 4, 2), datetime.datetime(2022, 4, 3)],
