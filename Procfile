@@ -1,1 +1,1 @@
-webserver: /bin/bash ./run.sh $PORT
+web: /bin/bash ./run.sh $PORT
