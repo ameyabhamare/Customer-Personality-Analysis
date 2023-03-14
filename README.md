@@ -1,3 +1,5 @@
+![example workflow](https://github.com/github/FitMe/actions/workflows/build_test.yml/badge.svg)
+
 ## Fitness Tracker: A Usage Trends Analysis
 
 ### Theme 

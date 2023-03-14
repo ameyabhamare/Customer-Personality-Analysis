@@ -1,0 +1,9 @@
+name: FitMe
+channels:
+  - defaults
+dependencies:
+  - sklearn
+  - pylint
+  - python=3.8.5
+  - pandas
+  - streamlit
