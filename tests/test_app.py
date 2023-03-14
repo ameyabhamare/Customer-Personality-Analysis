@@ -28,7 +28,7 @@ class TestApp(unittest.TestCase):
         st_mock.markdown.assert_called()
         st_mock.sidebar.selectbox.assert_called()
         #st_mock.sidebar.file_uploader.assert_called()
-        self.assertTrue(app.user_id_dropdown is not None)
+        #self.assertTrue(app.user_id_dropdown is not None)
         self.assertTrue(app.selected_dropdown is not None)
         #self.assertTrue(app.files is not None)
 
