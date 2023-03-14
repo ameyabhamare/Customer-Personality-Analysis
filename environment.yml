@@ -1,9 +1,10 @@
 name: FitMe
 channels:
   - defaults
+  - conda-forge
 dependencies:
-  - sklearn
+  - scikit-learn
   - pylint
-  - python=3.8.5
+  - python
   - pandas
   - streamlit

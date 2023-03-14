@@ -172,8 +172,8 @@ def render_caloric_model():
         process_daily_activity_data(df_daily_activity_unproc, user_id_dropdown)
     slider_val = st.slider(selected_c_dropdown,
                            round(
-                               min(df_daily_activity_proc[selected_c_dropdown])),
-                           round(max(df_daily_activity_proc[selected_c_dropdown])), 1)
+                               min(df_daily_activity_unproc[selected_c_dropdown])),
+                           round(max(df_daily_activity_unproc[selected_c_dropdown])), 1)
 
     fig, ax = graph_utils.create_fig()
     graph_utils.create_regplot(ax=ax,
@@ -187,11 +187,11 @@ def render_caloric_model():
     st.markdown("""
     <style>
     .big-font {
-        font-size:50px !important;
+        font-size:20px !important;
     }
     </style>
     """, unsafe_allow_html=True)
-    st.markdown(f'<p class="big-font">Model Daily Caloric:\
+    st.markdown(f'<p class="big-font">According to the model based on your tracked calories, your daily caloric would be:\
                 {round(lr.predict([[slider_val]])[0][0], 2)}</p>', unsafe_allow_html=True)
 
 
