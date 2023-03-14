@@ -67,7 +67,7 @@ class TestGraphUtils(unittest.TestCase):
         xlabel='X Label'
         ylabel='Y Label'
         title='KDE Plot'
-        # Mocking sns.kdeplot
+        
         with patch('seaborn.kdeplot') as mock_kdeplot:
             mock_ax = Mock()
             mock_kdeplot.return_value = mock_ax

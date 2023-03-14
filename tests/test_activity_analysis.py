@@ -11,6 +11,7 @@ import analysis
 
 class TestProcessDailyActivityData(unittest.TestCase):
     def setUp(self):
+        # set up mock data frame
         self.df = pd.DataFrame({
             'Id': [1, 1, 1, 1, 1, 2],
             'ActivityDate': ['01/01/2022', '01/01/2022', '01/01/2022', '01/01/2022', '01/01/2022', '03/11/2022'],
