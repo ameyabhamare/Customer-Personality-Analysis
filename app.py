@@ -220,7 +220,6 @@ user_id_dropdown = None
 selected_dropdown = None
 files = None
 
-
 def setup_streamlit_ui():
     """
     Sets up streamlit global streamlit UI features
