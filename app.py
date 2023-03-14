@@ -186,9 +186,9 @@ def render_caloric_model():
     }
     </style>
     """, unsafe_allow_html=True)
-    st.markdown(f'<p class="big-font">According to the model\
-                based on your tracked calories, your daily caloric would be:\
-                {round(lr.predict([[slider_val]])[0][0], 2)}</p>', unsafe_allow_html=True)
+    st.markdown(f'<p class="big-font">According to the model based on your\
+                 tracked calories, your daily caloric would be:\
+                {round(lr.predict([[slider_val]])[0][0], 2)} calories</p>', unsafe_allow_html=True)
 
 def render_default():
     """
