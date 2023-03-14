@@ -8,6 +8,15 @@ from analysis import\
     sleep_analysis, calories_analysis, steps_analysis, heartrate_analysis, activity_analysis
 from utils import graph_utils, analysis_utils
 
+def process_files(file_list):
+    """
+    Process files that are being uploaded using the file upload option
+    """
+    for file_ in file_list:
+        file_name = file_.name
+        file_path = f'data/{file_name}'
+        print(file_path)
+    
 def render_heartrate_analysis():
     """
     Renders the heartrate analysis charts
@@ -188,7 +197,7 @@ def render_default():
     """
     Render default page
     """
-    pass
+    return
 
 
 def render_analysis(selected_drop_down):
