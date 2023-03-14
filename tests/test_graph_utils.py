@@ -11,9 +11,6 @@ sys.path.insert(0, (os.path.abspath(os.path.dirname(os.path.abspath(__file__)) +
 import utils
 
 class TestGraphUtils(unittest.TestCase):
-    def setUp(self):
-        self.df = pd.DataFrame({'x': ['a', 'b', 'c'], 'y': [1, 2, 3]})
-    
     def test_create_fig(self):
         with patch('matplotlib.pyplot.subplots') as mock_subplots:
             mock_fig, mock_ax = Mock(), Mock()
@@ -49,20 +46,21 @@ class TestGraphUtils(unittest.TestCase):
             mock_ax.set.assert_called_with(xlabel='X Label', ylabel='Y Label')
 
     def test_create_lineplot(self):
+        df = pd.DataFrame({'x': ['a', 'b', 'c'], 'y': [1, 2, 3]})
         with patch('seaborn.lineplot') as mock_lineplot:
             mock_ax = Mock()
             mock_lineplot.return_value = mock_ax
 
             # Test calling function with default arguments
-            ax = utils.graph_utils.create_lineplot(data=self.df)
+            ax = utils.graph_utils.create_lineplot(data=df)
             self.assertEqual(ax, mock_ax)
-            mock_lineplot.assert_called_once_with(data=self.df)
+            mock_lineplot.assert_called_once_with(data=df)
             mock_ax.set.assert_called_once_with(xlabel='', ylabel='', title='')
 
             # Test calling function with non-default arguments
-            ax = utils.graph_utils.create_lineplot(data=self.df, xlabel='X Label', ylabel='Y Label', title='Plot Title')
+            ax = utils.graph_utils.create_lineplot(data=df, xlabel='X Label', ylabel='Y Label', title='Plot Title')
             self.assertEqual(ax, mock_ax)
-            mock_lineplot.assert_called_with(data=self.df)
+            mock_lineplot.assert_called_with(data=df)
             mock_ax.set.assert_called_with(xlabel='X Label', ylabel='Y Label', title='Plot Title')
 
     def test_create_kdeplot(self):
