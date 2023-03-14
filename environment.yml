@@ -2,7 +2,6 @@ name: FitMe
 channels:
   - defaults
   - conda-forge
-  - 'https://repo.continuum.io/pkgs/free'
 dependencies:
   - scikit-learn
   - pylint
