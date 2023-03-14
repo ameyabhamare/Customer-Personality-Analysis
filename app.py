@@ -16,7 +16,7 @@ def process_files(file_list):
         file_name = file_.name
         file_path = f'data/{file_name}'
         print(file_path)
-        
+
 def render_heartrate_analysis():
     """
     Renders the heartrate analysis charts
