@@ -2,7 +2,6 @@ name: FitMe
 channels:
   - defaults
 dependencies:
-  - conda
   - sklearn
   - pylint
   - python=3.8.5
