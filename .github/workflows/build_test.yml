@@ -26,7 +26,7 @@ jobs:
 
     # Provide a runner. Options are listed on GitHub, but include
     # windows, ubuntu, and macos (latest, as well as specific versions)
-    runs-on: ubuntu-latest
+    runs-on: ["ubuntu-latest", "windows-latest"]
 
     # In order to get Conda environments to work properly, we need to
     # tell the runner to start up the bash shell in a way that respects
@@ -72,7 +72,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
           # We don't need the base environment, so don't activate it
           auto-activate-base: false
-      
+
       # You don't normally need test coverage information when
       # developing locally - we just want it in CI - so we install
       # it here instead of in our environment file (which we also
