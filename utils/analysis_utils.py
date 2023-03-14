@@ -1,4 +1,5 @@
 import pandas as pd
+import glob
 
 def filter_df_user_id(df, user_id):
     """
@@ -16,3 +17,25 @@ def filter_df_user_id(df, user_id):
         raise TypeError("Invalid user id")
     
     return df
+
+
+def populate_dropdowns():
+    """
+    A function to get a unique list of user IDs for the for the drop down
+    
+    Parameters:
+    - df (pandas DataFrame): The DataFrame to get unique IDs from
+    
+    Returns:
+    - set of common IDS
+    """
+
+    store_ids = []
+    for path in glob.glob("data/*"):
+        df = pd.read_csv(path)
+        store_ids.append(set(df['Id'].unique().tolist()))
+
+    if len(store_ids) == 0:
+        raise TypeError("Incorrect Data Import")
+    
+    return set.intersection(*store_ids)

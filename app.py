@@ -6,13 +6,17 @@ import pandas as pd
 
 from analysis import\
 sleep_analysis, calories_analysis, steps_analysis, heartrate_analysis, activity_analysis
-from utils import graph_utils
+from utils import graph_utils, analysis_utils
 
 st.title("FitMe")
 st.markdown("Fitness Explorer. This app performs health analysis based on fitness tracking data")
 dropdown_options = ['Heart Rate', 'Activity & Weight', 'Caloric Model']
-selected_dropdown = st.sidebar.selectbox("Select Analysis", options = dropdown_options)
-files = st.sidebar.file_uploader("Please choose a csv file", accept_multiple_files = True)
+user_id_dropdown = st.sidebar.selectbox("Select User ID",
+                                        options = analysis_utils.populate_dropdowns())
+selected_dropdown = st.sidebar.selectbox("Select Analysis",
+                                         options = dropdown_options)
+files = st.sidebar.file_uploader("Please choose a csv file",
+                                 accept_multiple_files = True)
 
 # Processing multiple files in the user selection dropdown
 for file_ in files:
@@ -28,7 +32,8 @@ if selected_dropdown == 'Heart Rate':
 
     # process data
     heartrate_proc = heartrate_analysis.process_heartrate_data(df_heartrate_unproc,
-                                                               df_sleep_data_unproc)
+                                                               df_sleep_data_unproc,
+                                                               user_id_dropdown)
 
     # daily bpm
     fig_daily_bpm, ax_daily_bpm = graph_utils.create_fig()
@@ -83,11 +88,15 @@ if selected_dropdown == 'Activity & Weight':
     df_daily_calories_unproc = pd.read_csv("data/dailyCalories_merged.csv")
 
     # process data
-    sleep_proc = sleep_analysis.process_sleep_analysis_data(df_sleep_data_unproc)
-    daily_steps_proc = steps_analysis.process_daily_steps_data(df_daily_steps_unproc)
+    sleep_proc = sleep_analysis.process_sleep_analysis_data(df_sleep_data_unproc,
+                                                            user_id_dropdown)
+    daily_steps_proc = steps_analysis.process_daily_steps_data(df_daily_steps_unproc,
+                                                               user_id_dropdown)
     daily_steps_sleep_proc = steps_analysis.process_daily_sleep_steps_data(df_daily_steps_unproc,
-                                                                           df_sleep_data_unproc)
-    daily_calories_proc = calories_analysis.process_daily_calories_data(df_daily_calories_unproc)
+                                                                           df_sleep_data_unproc,
+                                                                           user_id_dropdown)
+    daily_calories_proc = calories_analysis.process_daily_calories_data(df_daily_calories_unproc,
+                                                                        user_id_dropdown)
 
     # sleep analysis
     fig_sleep, ax_sleep = graph_utils.create_fig()
@@ -152,12 +161,13 @@ if selected_dropdown == 'Caloric Model':
                           'VeryActiveDistance',
                           'SedentaryActiveDistance']
     selected_c_dropdown = st.selectbox("Select Variable", options = dropdown_c_options)
-    slider_val = st.slider(selected_c_dropdown,
-                           round(min(df_daily_activity_unproc[selected_c_dropdown])),
-                           round(max(df_daily_activity_unproc[selected_c_dropdown])), 1)
 
     # process data
-    df_daily_activity_proc = activity_analysis.process_daily_activity_data(df_daily_activity_unproc)
+    df_daily_activity_proc = activity_analysis.\
+    process_daily_activity_data(df_daily_activity_unproc, user_id_dropdown)
+    slider_val = st.slider(selected_c_dropdown,
+                           round(min(df_daily_activity_proc[selected_c_dropdown])),
+                           round(max(df_daily_activity_proc[selected_c_dropdown])), 1)
 
     fig, ax = graph_utils.create_fig()
     graph_utils.create_regplot(ax=ax,
