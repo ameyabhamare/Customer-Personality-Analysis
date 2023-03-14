@@ -8,33 +8,11 @@ from analysis import\
     sleep_analysis, calories_analysis, steps_analysis, heartrate_analysis, activity_analysis
 from utils import graph_utils, analysis_utils
 
-user_id_dropdown = None
-selected_dropdown = None
-files = None
 
-
-def setup_streamlit_ui():
-    """
-    Sets up streamlit global streamlit UI features
-    """
-    global user_id_dropdown, selected_dropdown, files
-    st.title("FitMe")
-    st.markdown(
-        "Fitness Explorer. This app performs health analysis based on fitness tracking data")
-    dropdown_options = ['Heart Rate', 'Activity & Weight', 'Caloric Model']
-    user_id_dropdown = st.sidebar.selectbox("Select User ID",
-                                            options=analysis_utils.populate_dropdowns())
-    selected_dropdown = st.sidebar.selectbox("Select Analysis",
-                                             options=dropdown_options)
-    files = st.sidebar.file_uploader("Please choose a csv file",
-                                     accept_multiple_files=True)
-
-
-def process_files():
+def process_files(files):
     """
     Process files that are being uploaded through file uplaod
     """
-    global files
     # Processing multiple files in the user selection dropdown
     for file_ in files:
         file_name = file_.name
@@ -225,6 +203,9 @@ def render_default():
 
 
 def render_analysis(selected_dropdown):
+    """
+    Render analysis charts based on dropdown value
+    """
     if selected_dropdown == 'Heart Rate':
         render_heartrate_analysis()
     elif selected_dropdown == 'Activity & Weight':
@@ -234,8 +215,30 @@ def render_analysis(selected_dropdown):
     else:
         render_default()
 
+# global variables for UI functions to use streamlit
+user_id_dropdown = None
+selected_dropdown = None
+files = None
+
+
+def setup_streamlit_ui():
+    """
+    Sets up streamlit global streamlit UI features
+    """
+    global user_id_dropdown, selected_dropdown, files
+    st.title("FitMe")
+    st.markdown(
+        "Fitness Explorer. This app performs health analysis based on fitness tracking data")
+    dropdown_options = ['Heart Rate', 'Activity & Weight', 'Caloric Model']
+    user_id_dropdown = st.sidebar.selectbox("Select User ID",
+                                            options=analysis_utils.populate_dropdowns())
+    selected_dropdown = st.sidebar.selectbox("Select Analysis",
+                                             options=dropdown_options)
+    files = st.sidebar.file_uploader("Please choose a csv file",
+                                     accept_multiple_files=True)
+
 
 if __name__ == "__main__":
     setup_streamlit_ui()
-    process_files()
+    process_files(files)
     render_analysis(selected_dropdown)
