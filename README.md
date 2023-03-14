@@ -21,6 +21,11 @@ OR
 ### Testing
 We have a suite of unit test that covers code within the `analysis` and `utils` Python module. You can easily run all the test suite using the `python run_tests.py` command which will execute the tests suites within the `tests/` folder. 
 
+### Continuous deployment
+We're using Heroku to automatically deploy our application to our `prod` environment, which is available here: [http://fitme.herokuapp.com](http://fitme.herokuapp.com).
+
+To deploy to `production`, dev can simply push on the Heroku remote `git push heroku main`. This step is automated in our CI build, which deploys automatically to Heroku if all unit tests are passing.
+
 ### Code health
 #### Linting
 We provided a `.pylintrc` file for you to use and configure your dev environment. 
