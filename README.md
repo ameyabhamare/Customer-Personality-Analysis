@@ -17,7 +17,11 @@ OR
 - Otherwise, you can use the `streamlit run app.py` command to run the application **after** installing the Python dependencies through pip.
 
 ### Testing
+We have a suite of unit test that covers code within the `analysis` and `utils` Python module. You can easily run all the test suite using the `python run_tests.py` command which will execute the tests suites within the `tests/` folder. 
 
+### Code health
+## Linting
+We provided a `.pylintrc` file for you to use and configure your dev environment. 
 
 ### Questions
 We propose a tool **FitMe** that allows you to feed in your smart watch data to provide you with answer to questions
