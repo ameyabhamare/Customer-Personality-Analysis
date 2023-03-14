@@ -20,7 +20,7 @@ OR
 We have a suite of unit test that covers code within the `analysis` and `utils` Python module. You can easily run all the test suite using the `python run_tests.py` command which will execute the tests suites within the `tests/` folder. 
 
 ### Code health
-## Linting
+#### Linting
 We provided a `.pylintrc` file for you to use and configure your dev environment. 
 
 ### Questions
