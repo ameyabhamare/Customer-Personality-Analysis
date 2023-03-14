@@ -33,5 +33,6 @@ class TestAnalysisUtils(unittest.TestCase):
         with self.assertRaises(TypeError):
             utils.analysis_utils.filter_df_user_id(df, user_id)
 
+
 if __name__ == "__main__":
     unittest.main()
