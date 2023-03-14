@@ -77,6 +77,6 @@ The [FitBit Fitness Tracker Data](https://www.kaggle.com/datasets/arashnic/fitbi
 
 ### Contributors
 Ameya Bhamare: ameyarb@uw.edu
-Akshit Miglani: amiglani@uw.edu
+Akshit Miglani: amiglani@uw.edu | akshit.miglani09@gmail.com
 Harshit Rai: harshit@uw.edu
 Jeremie Poisson: jepoisso@uw.edu
