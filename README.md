@@ -14,7 +14,7 @@ Human temporal routine behavioral analysis and pattern recognition.
 - Download the [FitBit Kaggle dataset](https://www.kaggle.com/datasets/arashnic/fitbit) and extract it to the `data/` directory at the root of this project.
 
 ### Running the app
-- We conveniently have a `./run.sh` script you can run to start the application. 
+- We conveniently have a `./run.sh 80080` script you can run to start the application (this will launch app on port :8080)
 OR
 - Otherwise, you can use the `streamlit run app.py` command to run the application **after** installing the Python dependencies through pip.
 

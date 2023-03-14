@@ -1,3 +1,3 @@
 #!/bin/bash
 
-streamlit run app.py
+streamlit run app.py --server.port $1
