@@ -228,5 +228,4 @@ def setup_streamlit_ui():
 
 if __name__ == "__main__":
     setup_streamlit_ui()
-    process_files(files)
     render_analysis(selected_dropdown)
