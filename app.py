@@ -197,7 +197,7 @@ def render_default():
     """
     Render default page
     """
-    return
+    st.markdown('Please selection an analysis section through the drop-down on the left-menu')
 
 
 def render_analysis(selected_drop_down):
@@ -237,5 +237,4 @@ def setup_streamlit_ui():
 
 if __name__ == "__main__":
     setup_streamlit_ui()
-    process_files(files)
     render_analysis(selected_dropdown)
