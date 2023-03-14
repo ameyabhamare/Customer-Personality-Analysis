@@ -16,7 +16,7 @@ def process_files(file_list):
         file_name = file_.name
         file_path = f'data/{file_name}'
         print(file_path)
-    
+         
 def render_heartrate_analysis():
     """
     Renders the heartrate analysis charts
@@ -73,7 +73,6 @@ def render_heartrate_analysis():
     st.pyplot(fig_weekly_bpm)
     st.pyplot(fig_density_bpm)
     st.pyplot(fig_box_plot_bpm)
-
 
 def render_activity_weight_analysis():
     """
@@ -148,7 +147,6 @@ def render_activity_weight_analysis():
     st.pyplot(fig_sleep_steps)
     st.pyplot(fig_cals)
 
-
 def render_caloric_model():
     """
     Renders the caloric analysis charts
@@ -192,13 +190,12 @@ def render_caloric_model():
                 based on your tracked calories, your daily caloric would be:\
                 {round(lr.predict([[slider_val]])[0][0], 2)}</p>', unsafe_allow_html=True)
 
-
 def render_default():
     """
     Render default page
     """
-    st.markdown('Please selection an analysis section through the drop-down on the left-menu')
-
+    st.markdown('Please select what kind of analysis you would like\
+                through the drop-down on the left-menu')
 
 def render_analysis(selected_drop_down):
     """
