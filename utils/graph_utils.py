@@ -1,9 +1,13 @@
+"""
+Utilities for graph modules
+"""
 import seaborn as sns
 import matplotlib.pyplot as plt
 import matplotlib
 
 # Setting matplotlib backend to 'Agg'
 matplotlib.use('Agg')
+
 
 def create_fig(**kwargs):
     """
@@ -20,6 +24,7 @@ def create_fig(**kwargs):
     # Create a figure with subplots based on the given parameters
     fig, ax = plt.subplots(**kwargs)
     return fig, ax
+
 
 def create_barplot(x_axis, y_axis, color='r', ax=None, **kwargs):
     """
@@ -42,6 +47,7 @@ def create_barplot(x_axis, y_axis, color='r', ax=None, **kwargs):
     ax.tick_params(labelrotation=90)
     return ax
 
+
 def create_lineplot(xlabel='', ylabel='', title='', **kwargs):
     """
     Create a line plot with the given parameters
@@ -61,6 +67,7 @@ def create_lineplot(xlabel='', ylabel='', title='', **kwargs):
     ax.set(xlabel=xlabel, ylabel=ylabel, title=title)
     ax.tick_params(labelrotation=90)
     return ax
+
 
 def create_kdeplot(vals, xlabel='', ylabel='', title='', **kwargs):
     """
@@ -104,6 +111,7 @@ def create_boxplot(data, xlabel='', ylabel='', title='', **kwargs):
     ax.set(xlabel=xlabel, ylabel=ylabel, title=title)
     ax.tick_params(labelrotation=90)
     return ax
+
 
 def create_regplot(**kwargs):
     """
