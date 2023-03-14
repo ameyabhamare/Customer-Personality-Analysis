@@ -1,5 +1,7 @@
 ![example workflow](https://github.com/ameyabhamare/FitMe/actions/workflows/build_test.yml/badge.svg)
 
+[![Coverage Status](https://coveralls.io/repos/github/ameyabhamare/FitMe/badge.svg?branch=main)](https://coveralls.io/github/ameyabhamare/FitMe?branch=main)
+
 ## Fitness Tracker: A Usage Trends Analysis
 ### Goal
 The end product will be a tool that functions as described above. We will host it on the Cloud with an ML model and EDA pipelines running in the background. 
