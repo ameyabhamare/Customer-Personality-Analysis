@@ -1,7 +1,8 @@
 ![example workflow](https://github.com/ameyabhamare/FitMe/actions/workflows/build_test.yml/badge.svg)
 
 ## Fitness Tracker: A Usage Trends Analysis
-
+### Goal
+The end product will be a tool that functions as described above. We will host it on the Cloud with an ML model and EDA pipelines running in the background. 
 ### Theme 
 Human temporal routine behavioral analysis and pattern recognition.
 
@@ -21,6 +22,35 @@ OR
 ### Testing
 We have a suite of unit test that covers code within the `analysis` and `utils` Python module. You can easily run all the test suite using the `python run_tests.py` command which will execute the tests suites within the `tests/` folder. 
 
+### Project structure
+```
+FitMe/                              # FitMe python module
+├── app.py                          # main entrypoint
+├── data/
+│   ├── [sample datasets from kaggle]
+├── analysis/                       # Analysis python module
+│   ├── activity_analysis.py        # contains functions for processing activity data
+│   ├── calories_analysis.py        # contains functions for processing calories data
+│   ├── heartrate_analysis.py       # contains functions for processing heart rate data
+│   ├── sleep_analysis.py           # contains functions for processing sleep data
+│   ├── steps_analysis.py           # contains functions for processing steps data
+├── utils/                          # Utils python module
+│   ├── graph_utils.py              # contains utility functions for data visualization
+│   ├── analysis_utils.py           # contains utility functions for analysis module
+├── tests/                          # Tests python module
+│   ├── [test files]
+├── examples/
+│   ├── [example files]
+├── docs/
+│   ├── [project documentation]
+├── run_tests.py
+├── run.sh
+├── .github/
+│   ├── [continuous integration environment config]
+└── .vscode/
+    ├── [vscode settings & extension recommendations]
+```
+
 ### Continuous deployment
 We're using Heroku to automatically deploy our application to our `prod` environment, which is available here: [http://fitme.herokuapp.com](http://fitme.herokuapp.com).
 
@@ -39,9 +69,6 @@ We propose a tool **FitMe** that allows you to feed in your smart watch data to 
 * Understand the sleep stages and find out what it takes to get a better deep sleep.
 * What is the impact of a Netflix binge on weekend sleep?
 * Use Machine Learning to see if there is a hidden pattern to attain better sleep
-
-### Goal
-The end product will be a tool that functions as described above. We will host it on the Cloud with an ML model and EDA pipelines running in the background. 
 
 ### Data sources
 The [FitBit Fitness Tracker Data](https://www.kaggle.com/datasets/arashnic/fitbit) is a rich collection of 18 different csv files that collates information about daily activities, calorie, heartrate, sleep cycles, intensities and steps, among others.
