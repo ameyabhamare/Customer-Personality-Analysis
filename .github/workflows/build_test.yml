@@ -91,7 +91,8 @@ jobs:
       # Next step: run pylint. Anything less than 10/10 will fail.
       - name: Lint with pylint
         run: |
-          pylint app.py
+          cd ..
+          pylint app.py 
           pylint analysis/**/*.py
           pylint tests/*.py
           pylint run_tests.py
