@@ -172,8 +172,8 @@ def render_caloric_model():
         process_daily_activity_data(df_daily_activity_unproc, user_id_dropdown)
     slider_val = st.slider(selected_c_dropdown,
                            round(
-                               min(df_daily_activity_proc[selected_c_dropdown])),
-                           round(max(df_daily_activity_proc[selected_c_dropdown])), 1)
+                               min(df_daily_activity_unproc[selected_c_dropdown])),
+                           round(max(df_daily_activity_unproc[selected_c_dropdown])), 1)
 
     fig, ax = graph_utils.create_fig()
     graph_utils.create_regplot(ax=ax,
