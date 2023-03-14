@@ -5,26 +5,47 @@ import streamlit as st
 import pandas as pd
 
 from analysis import\
-sleep_analysis, calories_analysis, steps_analysis, heartrate_analysis, activity_analysis
+    sleep_analysis, calories_analysis, steps_analysis, heartrate_analysis, activity_analysis
 from utils import graph_utils, analysis_utils
 
-st.title("FitMe")
-st.markdown("Fitness Explorer. This app performs health analysis based on fitness tracking data")
-dropdown_options = ['Heart Rate', 'Activity & Weight', 'Caloric Model']
-user_id_dropdown = st.sidebar.selectbox("Select User ID",
-                                        options = analysis_utils.populate_dropdowns())
-selected_dropdown = st.sidebar.selectbox("Select Analysis",
-                                         options = dropdown_options)
-files = st.sidebar.file_uploader("Please choose a csv file",
-                                 accept_multiple_files = True)
+user_id_dropdown = None
+selected_dropdown = None
+files = None
 
-# Processing multiple files in the user selection dropdown
-for file_ in files:
-    file_name = file_.name
-    file_path = f'data/{file_name}'
-    # df = pd.read_csv(file_path)
-# Heart rate analysis
-if selected_dropdown == 'Heart Rate':
+
+def setup_streamlit_ui():
+    """
+    Sets up streamlit global streamlit UI features
+    """
+    global user_id_dropdown, selected_dropdown, files
+    st.title("FitMe")
+    st.markdown(
+        "Fitness Explorer. This app performs health analysis based on fitness tracking data")
+    dropdown_options = ['Heart Rate', 'Activity & Weight', 'Caloric Model']
+    user_id_dropdown = st.sidebar.selectbox("Select User ID",
+                                            options=analysis_utils.populate_dropdowns())
+    selected_dropdown = st.sidebar.selectbox("Select Analysis",
+                                             options=dropdown_options)
+    files = st.sidebar.file_uploader("Please choose a csv file",
+                                     accept_multiple_files=True)
+
+
+def process_files():
+    """
+    Process files that are being uploaded through file uplaod
+    """
+    global files
+    # Processing multiple files in the user selection dropdown
+    for file_ in files:
+        file_name = file_.name
+        file_path = f'data/{file_name}'
+        # df = pd.read_csv(file_path)
+
+
+def render_heartrate_analysis():
+    """
+    Renders the heartrate analysis charts
+    """
     # load data
     df_heartrate_unproc = pd.read_csv('data/heartrate_seconds_merged.csv')
     df_sleep_data_unproc = pd.read_csv("data/sleepDay_merged.csv")
@@ -77,8 +98,12 @@ if selected_dropdown == 'Heart Rate':
     st.pyplot(fig_weekly_bpm)
     st.pyplot(fig_density_bpm)
     st.pyplot(fig_box_plot_bpm)
-# Activity and weight analysis
-if selected_dropdown == 'Activity & Weight':
+
+
+def render_activity_weight_analysis():
+    """
+    Renders the activity analysis charts
+    """
     # load data
     df_sleep_data_unproc = pd.read_csv("data/sleepDay_merged.csv")
     df_daily_steps_unproc = pd.read_csv("data/dailySteps_merged.csv")
@@ -148,7 +173,11 @@ if selected_dropdown == 'Activity & Weight':
     st.pyplot(fig_sleep_steps)
     st.pyplot(fig_cals)
 
-if selected_dropdown == 'Caloric Model':
+
+def render_caloric_model():
+    """
+    Renders the caloric analysis charts
+    """
     # load data
     df_daily_activity_unproc = pd.read_csv("data/dailyActivity_merged.csv")
     dropdown_c_options = ['VeryActiveMinutes',
@@ -157,20 +186,22 @@ if selected_dropdown == 'Caloric Model':
                           'ModeratelyActiveDistance',
                           'VeryActiveDistance',
                           'SedentaryActiveDistance']
-    selected_c_dropdown = st.selectbox("Select Variable", options = dropdown_c_options)
+    selected_c_dropdown = st.selectbox(
+        "Select Variable", options=dropdown_c_options)
 
     # process data
     df_daily_activity_proc = activity_analysis.\
-    process_daily_activity_data(df_daily_activity_unproc, user_id_dropdown)
+        process_daily_activity_data(df_daily_activity_unproc, user_id_dropdown)
     slider_val = st.slider(selected_c_dropdown,
-                           round(min(df_daily_activity_proc[selected_c_dropdown])),
+                           round(
+                               min(df_daily_activity_proc[selected_c_dropdown])),
                            round(max(df_daily_activity_proc[selected_c_dropdown])), 1)
 
     fig, ax = graph_utils.create_fig()
     graph_utils.create_regplot(ax=ax,
-                               data = df_daily_activity_proc,
-                               x = selected_c_dropdown,
-                               y = 'Calories')
+                               data=df_daily_activity_proc,
+                               x=selected_c_dropdown,
+                               y='Calories')
     st.pyplot(fig)
     lr = activity_analysis.daily_activity_calories_linreg_model(df_daily_activity_proc,
                                                                 selected_c_dropdown)
@@ -184,3 +215,27 @@ if selected_dropdown == 'Caloric Model':
     """, unsafe_allow_html=True)
     st.markdown(f'<p class="big-font">Model Daily Caloric:\
                 {round(lr.predict([[slider_val]])[0][0], 2)}</p>', unsafe_allow_html=True)
+
+
+def render_default():
+    """
+    Render default page
+    """
+    pass
+
+
+def render_analysis(selected_dropdown):
+    if selected_dropdown == 'Heart Rate':
+        render_heartrate_analysis()
+    elif selected_dropdown == 'Activity & Weight':
+        render_activity_weight_analysis()
+    elif selected_dropdown == 'Caloric Model':
+        render_caloric_model()
+    else:
+        render_default()
+
+
+if __name__ == "__main__":
+    setup_streamlit_ui()
+    process_files()
+    render_analysis(selected_dropdown)
