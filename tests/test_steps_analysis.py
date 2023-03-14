@@ -3,14 +3,13 @@ import os
 import unittest
 import pandas as pd
 
-from unittest.mock import patch
+from unittest.mock import patch, call
 
 sys.path.insert(0, (os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + "/../")))
 
 import analysis
 
 class TestProcessDailyStepsData(unittest.TestCase):
-
     def setUp(self):
         self.mock_df_daily_steps = pd.DataFrame({
             'Id': [1503960366, 1503960366, 1503960366, 1503960366],
@@ -50,7 +49,17 @@ class TestProcessDailyStepsData(unittest.TestCase):
             'StepTotal': [13162, 10735, 9762, 12669]
         })
         pd.testing.assert_frame_equal(filtered_data[expected_columns], expected_data)
+    
+    @patch('analysis.steps_analysis.analysis_utils.filter_df_user_id')
+    def test_process_daily_sleep_steps_data_filter_user_id(self, mock_filter_df_user_id):
+        # Set up mock return value
+        mock_filter_df_user_id.side_effect = [self.mock_df_daily_steps, self.mock_df_daily_sleep, self.mock_df_daily_sleep]
 
+        # Call the function with the mock data
+        analysis.steps_analysis.process_daily_sleep_steps_data(self.mock_df_daily_steps, self.mock_df_daily_sleep, '1503960366')
+        
+        self.assertEqual(len(mock_filter_df_user_id.mock_calls), 3)
+        
     def test_process_daily_sleep_steps_data(self):
         # Call the function with the mock data
         df_result = analysis.steps_analysis.process_daily_sleep_steps_data(self.mock_df_daily_steps, self.mock_df_daily_sleep, '1503960366')
