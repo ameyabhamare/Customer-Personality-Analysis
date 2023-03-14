@@ -8,17 +8,14 @@ from analysis import\
     sleep_analysis, calories_analysis, steps_analysis, heartrate_analysis, activity_analysis
 from utils import graph_utils, analysis_utils
 
-
-def process_files(files):
+def process_files(file_list):
     """
-    Process files that are being uploaded through file uplaod
+    Process files that are being uploaded using the file upload option
     """
-    # Processing multiple files in the user selection dropdown
-    for file_ in files:
+    for file_ in file_list:
         file_name = file_.name
         file_path = f'data/{file_name}'
-        # df = pd.read_csv(file_path)
-
+        print(file_path)
 
 def render_heartrate_analysis():
     """
@@ -76,7 +73,6 @@ def render_heartrate_analysis():
     st.pyplot(fig_weekly_bpm)
     st.pyplot(fig_density_bpm)
     st.pyplot(fig_box_plot_bpm)
-
 
 def render_activity_weight_analysis():
     """
@@ -151,7 +147,6 @@ def render_activity_weight_analysis():
     st.pyplot(fig_sleep_steps)
     st.pyplot(fig_cals)
 
-
 def render_caloric_model():
     """
     Renders the caloric analysis charts
@@ -194,23 +189,22 @@ def render_caloric_model():
     st.markdown(f'<p class="big-font">According to the model based on your tracked calories, your daily caloric would be:\
                 {round(lr.predict([[slider_val]])[0][0], 2)} calories</p>', unsafe_allow_html=True)
 
-
 def render_default():
     """
     Render default page
     """
-    pass
+    st.markdown('Please select what kind of analysis you would like\
+                through the drop-down on the left-menu')
 
-
-def render_analysis(selected_dropdown):
+def render_analysis(selected_drop_down):
     """
     Render analysis charts based on dropdown value
     """
-    if selected_dropdown == 'Heart Rate':
+    if selected_drop_down == 'Heart Rate':
         render_heartrate_analysis()
-    elif selected_dropdown == 'Activity & Weight':
+    elif selected_drop_down == 'Activity & Weight':
         render_activity_weight_analysis()
-    elif selected_dropdown == 'Caloric Model':
+    elif selected_drop_down == 'Caloric Model':
         render_caloric_model()
     else:
         render_default()
@@ -219,7 +213,6 @@ def render_analysis(selected_dropdown):
 user_id_dropdown = None
 selected_dropdown = None
 files = None
-
 
 def setup_streamlit_ui():
     """
@@ -240,5 +233,4 @@ def setup_streamlit_ui():
 
 if __name__ == "__main__":
     setup_streamlit_ui()
-    process_files(files)
     render_analysis(selected_dropdown)
