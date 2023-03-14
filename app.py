@@ -23,7 +23,6 @@ for file_ in files:
     file_name = file_.name
     file_path = f'data/{file_name}'
     # df = pd.read_csv(file_path)
-    
 # Heart rate analysis
 if selected_dropdown == 'Heart Rate':
     # load data
@@ -44,7 +43,6 @@ if selected_dropdown == 'Heart Rate':
                                 x='date_time',
                                 y='Value',
                                 title="Average daily BPM")
-    
     # weekly bpm
     fig_weekly_bpm, ax_weekly_bpm = graph_utils.create_fig()
     graph_utils.create_lineplot(ax=ax_weekly_bpm,
@@ -79,7 +77,6 @@ if selected_dropdown == 'Heart Rate':
     st.pyplot(fig_weekly_bpm)
     st.pyplot(fig_density_bpm)
     st.pyplot(fig_box_plot_bpm)
-    
 # Activity and weight analysis
 if selected_dropdown == 'Activity & Weight':
     # load data
