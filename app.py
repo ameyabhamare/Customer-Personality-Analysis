@@ -8,18 +8,6 @@ from analysis import\
     sleep_analysis, calories_analysis, steps_analysis, heartrate_analysis, activity_analysis
 from utils import graph_utils, analysis_utils
 
-
-def process_files(files):
-    """
-    Process files that are being uploaded through file uplaod
-    """
-    # Processing multiple files in the user selection dropdown
-    for file_ in files:
-        file_name = file_.name
-        file_path = f'data/{file_name}'
-        # df = pd.read_csv(file_path)
-
-
 def render_heartrate_analysis():
     """
     Renders the heartrate analysis charts
@@ -191,7 +179,8 @@ def render_caloric_model():
     }
     </style>
     """, unsafe_allow_html=True)
-    st.markdown(f'<p class="big-font">According to the model based on your tracked calories, your daily caloric would be:\
+    st.markdown(f'<p class="big-font">According to the model\
+                based on your tracked calories, your daily caloric would be:\
                 {round(lr.predict([[slider_val]])[0][0], 2)}</p>', unsafe_allow_html=True)
 
 
@@ -202,15 +191,15 @@ def render_default():
     pass
 
 
-def render_analysis(selected_dropdown):
+def render_analysis(selected_drop_down):
     """
     Render analysis charts based on dropdown value
     """
-    if selected_dropdown == 'Heart Rate':
+    if selected_drop_down == 'Heart Rate':
         render_heartrate_analysis()
-    elif selected_dropdown == 'Activity & Weight':
+    elif selected_drop_down == 'Activity & Weight':
         render_activity_weight_analysis()
-    elif selected_dropdown == 'Caloric Model':
+    elif selected_drop_down == 'Caloric Model':
         render_caloric_model()
     else:
         render_default()
