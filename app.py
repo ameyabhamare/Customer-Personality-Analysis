@@ -199,7 +199,7 @@ def render_default():
     """
     Render default page
     """
-    pass
+    st.markdown('Please selection an analysis section through the drop-down on the left-menu')
 
 
 def render_analysis(selected_dropdown):
