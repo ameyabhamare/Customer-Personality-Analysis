@@ -3,8 +3,10 @@
 [![Coverage Status](https://coveralls.io/repos/github/ameyabhamare/FitMe/badge.svg)](https://coveralls.io/github/ameyabhamare/FitMe)
 
 ## Fitness Tracker: A Usage Trends Analysis
+
 ### Goal
-The end product will be a tool that functions as described above. We will host it on the Cloud with an ML model and EDA pipelines running in the background. 
+The end product is a tool that allows the user to upload their fitbit data and presents them with relevant insights pertaining to weight, activity, heartrate and calorific needs.
+
 ### Theme 
 Human temporal routine behavioral analysis and pattern recognition.
 
