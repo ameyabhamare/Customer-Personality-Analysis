@@ -2,5 +2,6 @@
 omit =  
     *__init__*
     tests/*
+    examples/*
 exclude_lines =
     if __name__ == .__main__.:
