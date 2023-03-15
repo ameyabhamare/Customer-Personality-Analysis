@@ -4,7 +4,7 @@
 ## Fitness Tracker: A Usage Trends Analysis
 
 ### Goal
-The end product is a tool that allows the user to upload their fitbit data and presents them with relevant insights pertaining to weight, activity, heartrate and calorific needs.
+The end product is a tool that allows the user to upload their smart watch data and presents them with relevant insights pertaining to weight, activity, heartrate and calorific needs.
 
 ### Theme 
 Human temporal routine behavioral analysis and pattern recognition.
