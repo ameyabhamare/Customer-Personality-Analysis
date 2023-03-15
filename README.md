@@ -79,7 +79,7 @@ Our tool **FitMe** allows you to feed in your smart watch data to provide you wi
 The [FitBit Fitness Tracker Data](https://www.kaggle.com/datasets/arashnic/fitbit) is a rich collection of 18 different csv files that collates information about daily activities, calorie, heartrate, sleep cycles, intensities and steps, among others.
 
 ### Contributors
-* [Ameya Bhamare](https://github.com/ameyabhamare): ameyarb@uw.edu
+* [Ameya Bhamare](https://www.linkedin.com/in/ameyabhamare/): ameyarb@uw.edu
 * Akshit Miglani: amiglani@uw.edu | akshit.miglani09@gmail.com
 * Harshit Rai: harshit@uw.edu
 * Jeremie Poisson: jepoisso@uw.edu
