@@ -1,5 +1,4 @@
 ![example workflow](https://github.com/ameyabhamare/FitMe/actions/workflows/build_test.yml/badge.svg)
-
 [![Coverage Status](https://coveralls.io/repos/github/ameyabhamare/FitMe/badge.svg)](https://coveralls.io/github/ameyabhamare/FitMe)
 
 ## Fitness Tracker: A Usage Trends Analysis
