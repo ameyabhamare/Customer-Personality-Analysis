@@ -1,10 +1,13 @@
 ![example workflow](https://github.com/ameyabhamare/FitMe/actions/workflows/build_test.yml/badge.svg)
 
-[![Coverage Status](https://coveralls.io/repos/github/ameyabhamare/FitMe/badge.svg)](https://coveralls.io/github/ameyabhamare/FitMe)
+<img src="https://coveralls.io/repos/github/ameyabhamare/FitMe/badge.svg?branch=main&kill_cache=1" />
+
 
 ## Fitness Tracker: A Usage Trends Analysis
+
 ### Goal
-The end product will be a tool that functions as described above. We will host it on the Cloud with an ML model and EDA pipelines running in the background. 
+The end product is a tool that allows the user to upload their smart watch data and presents them with relevant insights pertaining to weight, activity, heartrate and calorific needs.
+
 ### Theme 
 Human temporal routine behavioral analysis and pattern recognition.
 
@@ -76,7 +79,7 @@ Our tool **FitMe** allows you to feed in your smart watch data to provide you wi
 The [FitBit Fitness Tracker Data](https://www.kaggle.com/datasets/arashnic/fitbit) is a rich collection of 18 different csv files that collates information about daily activities, calorie, heartrate, sleep cycles, intensities and steps, among others.
 
 ### Contributors
-* [Ameya Bhamare](https://github.com/ameyabhamare): ameyarb@uw.edu
+* [Ameya Bhamare](https://www.linkedin.com/in/ameyabhamare/): ameyarb@uw.edu
 * Akshit Miglani: amiglani@uw.edu | akshit.miglani09@gmail.com
 * Harshit Rai: harshit@uw.edu
 * Jeremie Poisson: jepoisso@uw.edu
