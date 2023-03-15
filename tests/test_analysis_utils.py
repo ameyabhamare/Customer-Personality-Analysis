@@ -63,6 +63,20 @@ class TestAnalysisUtils(unittest.TestCase):
                 pd_mock.read_csv.assert_called()
                 glob_mock.glob.assert_called()
                 self.assertEqual(store_ids, set([1, 2, 3]))
+    
+    def test_populate_dropdowns_no_user_id(self):
+        """
+        Unit test for populate_dropdowns
+        """
+        with patch("utils.analysis_utils.pd") as pd_mock:
+            with patch("utils.analysis_utils.glob") as glob_mock:
+                pd_mock.read_csv.return_value = pd.DataFrame({
+                    'Id': []
+                })
+                glob_mock.glob.return_value = ["path1", "path2"]
+
+                with self.assertRaises(TypeError):
+                    utils.analysis_utils.populate_dropdowns()
 
 
 if __name__ == "__main__":

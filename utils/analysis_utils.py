@@ -39,7 +39,8 @@ def populate_dropdowns():
         df = pd.read_csv(path)
         store_ids.append(set(df['Id'].unique().tolist()))
 
+    store_ids = set.intersection(*store_ids)
     if len(store_ids) == 0:
         raise TypeError("Incorrect Data Import")
 
-    return set.intersection(*store_ids)
+    return store_ids 
