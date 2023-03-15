@@ -1,4 +1,5 @@
 ![example workflow](https://github.com/ameyabhamare/FitMe/actions/workflows/build_test.yml/badge.svg)
+
 <img src="https://coveralls.io/repos/github/ameyabhamare/FitMe/badge.svg?branch=main&kill_cache=1" />
 
 
