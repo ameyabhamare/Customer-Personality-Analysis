@@ -1,7 +1,14 @@
 """
 Example file to demonstrate how to process sleep data
 """
+import sys
+import os
 import pandas as pd
+
+# make sure that fitme package is on PYTHONPATH
+sys.path.insert(
+    0, (os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + "/../")))
+
 # import sleep analysis from analysis package
 from analysis import sleep_analysis
 
